@@ -1,0 +1,5 @@
+bootstrap-3.3.7-dist
+.DS_Store
+design
+node_modules
+package-lock.json
