@@ -26,8 +26,6 @@
             <input class="add-a-meal-input" type="text" ng-model="mealLog.meal" />
             <input class="add-btn" type="submit" ng-click="update(mealLog)" value="add" />
           </form>
-    <!--  <pre>user = {{mealLog | json}}</pre>
-          <pre>master = {{master | json}}</pre> -->
         </div> <!-- add-a-meal-container-->
       </div> <!-- col-mid-9 -->   
       <div style="border-style: solid;" class="pie-chart, col-md-3, col-xs-3">
@@ -36,16 +34,21 @@
     </div> <!-- top row -->
   <!-- middle row -->
     <div class="row">
-      <div class="col-md-12, main-container" ng-controller="foodNamesCtrl">
+      <div class="col-md-12, main-container" ng-controller="foodNamesCtrl" >
+        <form ng-submit="submit()">
         <ul class="food-group-ul">
-          <li class="food-group-li" ng-repeat="x in foodGroups">
-            <input type="number" name="serving" min="0" max="20"/>
+          <li class="food-group-li" ng-repeat="x in foodGroups" ng-init = "data[$index] = x;" ng-model = "data[$index]">
+            <input type="number" ng-model = "data[$index].num" name="num"/> 
             <h2>{{ x.group }}</h2>
             <section style="background-color: lightblue;">
               {{x.example}}
             </section>
+        <!-- <input class="add-btn" type="submit" /> -->
+          <pre>data={{data}}</pre>
           </li>
-        </ul> 
+        </ul>
+         <input type="submit" id="submit" value="Submit" />
+      </form>
       </div> <!-- main-container -->
     </div> <!-- middle row -->
     <div class="row">
@@ -54,10 +57,10 @@
       </div> <!-- bottom-container -->
     </div>  
   </div> <!-- container -->
-  <footer class="white-footer">
+<!--   <footer class="white-footer">
   <p>cool things like github and main page pr presentation etc</p>
   <p>hello I'm {{ 5 + 5 }} testing anguler</p>
-  </footer>
+  </footer> -->
 
 <script>
   var mealData =  undefined;
@@ -67,8 +70,9 @@
       $scope.master = {};
       $scope.mealData = {};
       $scope.update = function(mealLog) {
+        console.log(mealLog)
         $scope.master = angular.copy(mealLog);
-        mealData = mealLog
+        mealData = mealLog;
       };
 
       $scope.reset = function() {
@@ -79,14 +83,23 @@
 
     }]);
 
-    app.controller('foodNamesCtrl', function($scope) {
+    app.controller('foodNamesCtrl', ['$scope', function($scope) {
+      
+      $scope.data = {};
+
       $scope.foodGroups = [
         {group:'Carb',example:'1 slice bread'},
         {group:'Fruits/Veggies',example:'1 cup raw leafy vegetables'},
         {group:'Protein',example:'3 oz cooked meat'},
         {group:'Oil and Fat',example:'1 tsp soft margarine'},
       ];
-    });
+      
+      // $scope.submit = function() {
+      //   console.log()
+      //     $scope.data.push();
+      // };
+
+    }]); //closing foodNameCtrl
 
   console.log(mealData)  
 </script>
