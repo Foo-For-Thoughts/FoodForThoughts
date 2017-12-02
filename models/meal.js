@@ -39,6 +39,9 @@ var Meals = sequelize.define("meals", {
   },
   veggieFruits: {
     type: Sequelize.INTEGER
+  },
+  fat: {
+    type: Sequelize.INTEGER
   }
 }, {
   timestamps: false

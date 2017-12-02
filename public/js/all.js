@@ -13,9 +13,11 @@ $.get("/api/all", function(data) {
     $("#well-section").append(wellSection);
 
     // Now  we add our book data to the well we just placed on the page
-    $("#book-well-" + i).append("<h2>" + (i + 1) + ". " + data[i].meal + "</h2>");
-    $("#book-well-" + i).append("<h3>Author: " + data[i].protein + "</h4>");
-    $("#book-well-" + i).append("<h3>Genre: " + data[i].carb + "</h4>");
-    $("#book-well-" + i).append("<h3>Pages: " + data[i].veggieFruits + "</h4>");
+    $("#book-well-" + i).append("<h2>Meal" + (i + 1) + ". " + data[i].meal + "</h2>");
+    $("#book-well-" + i).append("<h3>protein: " + data[i].protein + "</h4>");
+    $("#book-well-" + i).append("<h3>carb: " + data[i].carb + "</h4>");
+    $("#book-well-" + i).append("<h3>veggieFruits: " + data[i].veggieFruits + "</h4>");
+    $("#book-well-" + i).append("<h3>fat: " + data[i].fat + "</h4>");
+
   }
 });
