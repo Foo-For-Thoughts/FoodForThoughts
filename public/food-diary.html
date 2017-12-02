@@ -1,43 +1,94 @@
-<!DOCTYPE html>
-<html lang="en" ng-app>
-  <head>
-    <meta charset="UTF-8">
-    <title>Food for Thoughts - Diary</title>
-    <!-- Latest compiled and minified CSS -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Food for Thoughts - Log a Meal</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
     <link rel="stylesheet" href="css/style.css"> 
-  </head>
-<body id="html-body">
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Code+Pro|Ubuntu" rel="stylesheet">
+</head>
+
+<body  ng-app="addMeal"  id="html-body">
   <div class="container">
-    <div class="row, top-container">
+  <!-- top row  -->
+    <div class="row">
       <div class="col-md-9, col-xs-9">
-        <div class="row, todays-date">
-            <h1 class="text-right">December 12 2017</h1>
-        </div> <!-- today's date row -->
-        <div class="row, add-a-meal">
-          <h4>add a meal</h4>
-            
-        </div> <!-- add a meal-->
-      </div> <!-- col-mid-9 -->         
-      <div class="pie-chart, col-md-3, col-xs-3">
+        <div class="todays-date">
+            <p class="text-right">December 12 2017</p>
+        </div> <!-- today's date -->
+        <div class="add-a-meal-container" ng-controller="AddingMeal">
+          <h3 class="add-a-meal">Add a meal</h3>
+          <form novalidate class="meal-form, add-a-meal-form">
+            <input class="add-a-meal-input" type="text" ng-model="mealLog.meal" />
+            <input class="add-btn" type="submit" ng-click="update(mealLog)" value="add" />
+          </form>
+    <!--  <pre>user = {{mealLog | json}}</pre>
+          <pre>master = {{master | json}}</pre> -->
+        </div> <!-- add-a-meal-container-->
+      </div> <!-- col-mid-9 -->   
+      <div style="border-style: solid;" class="pie-chart, col-md-3, col-xs-3">
           <p>pie chart place holder</p>
-      </div> <!-- pie-chart -->
-    </div> <!-- top-container -->
-    <div class="row, main-container">
-      
-    </div> <!-- main-container -->
-    <div class="row, bottom-container">
-      
-    </div> <!-- bottom-container -->
-  </div><!-- closing container -->
-  <footer class="footer">
+      </div> <!-- pie-chart col-md-3 -->
+    </div> <!-- top row -->
+  <!-- middle row -->
+    <div class="row">
+      <div class="col-md-12, main-container" ng-controller="foodNamesCtrl">
+        <ul class="food-group-ul">
+          <li class="food-group-li" ng-repeat="x in foodGroups">
+            <input type="number" name="serving" min="0" max="20"/>
+            <h2>{{ x.group }}</h2>
+            <section style="background-color: lightblue;">
+              {{x.example}}
+            </section>
+          </li>
+        </ul> 
+      </div> <!-- main-container -->
+    </div> <!-- middle row -->
+    <div class="row">
+      <div style="border-style: solid; border-color: red;" class="col-md-12, bottom-container">
+        bottom container 
+      </div> <!-- bottom-container -->
+    </div>  
+  </div> <!-- container -->
+  <footer class="white-footer">
   <p>cool things like github and main page pr presentation etc</p>
   <p>hello I'm {{ 5 + 5 }} testing anguler</p>
   </footer>
-<!--   put JS links in here -->
+
+<script>
+  var mealData =  undefined;
+  var app= angular.module('addMeal', []);
+
+    app.controller('AddingMeal', ['$scope', function($scope) {
+      $scope.master = {};
+      $scope.mealData = {};
+      $scope.update = function(mealLog) {
+        $scope.master = angular.copy(mealLog);
+        mealData = mealLog
+      };
+
+      $scope.reset = function() {
+        $scope.user = angular.copy($scope.master);
+      };
+
+      $scope.reset();
+
+    }]);
+
+    app.controller('foodNamesCtrl', function($scope) {
+      $scope.foodGroups = [
+        {group:'Carb',example:'1 slice bread'},
+        {group:'Fruits/Veggies',example:'1 cup raw leafy vegetables'},
+        {group:'Protein',example:'3 oz cooked meat'},
+        {group:'Oil and Fat',example:'1 tsp soft margarine'},
+      ];
+    });
+
+  console.log(mealData)  
+</script>
 </body>
 </html>

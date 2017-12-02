@@ -9,24 +9,86 @@
     --olive-color: #EDD023;
 }
 
-
-
-#div {
-  border: var(--olive-color); 
-  border-style: solid;
-}
-
-
 #html-body {
   background-color: var(--lightgreen-color);
   color: var(--darkgreen-color);
 }
 
-.footer {
+.white-footer {
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background: white;
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  background-color: white;
 }
+
+.todays-date {
+  font-size: 5em;
+  /*font-family: 'Ubuntu', sans-serif;*/
+  /*font-family: 'Nunito', sans-serif;*/
+  font-family: 'Source Code Pro', monospace;
+}
+
+.add-a-meal-container {
+  /*font-family: 'Nunito', sans-serif;*/
+  font-family: 'Source Code Pro', monospace;
+  width: 65%;
+}
+
+.add-a-meal {
+  margin-left: 5%;
+  border-bottom: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--darkgreen-color);
+}
+
+.add-a-meal-form {
+  margin-left: 5%;
+  margin-bottom: 2em;
+}
+
+.add-a-meal-input {
+  width: 75%;
+  border-radius: 20px;
+  -webkit-appearance: textfield;
+  -webkit-rtl-ordering: logical;
+  cursor: auto;
+  padding: 0.3em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--darkgreen-color);
+  color: brown;
+}
+
+.add-btn {
+  height: 2.3em;
+  border-radius: 25px;
+  width: 20%;
+  border-color: var(--darkgreen-color);
+
+  /*to do: fix margin on the right;*/
+}
+
+.food-group-ul {
+  list-style: none; 
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 1em; 
+}
+
+.food-group-li{
+  width: 20%;
+  text-align: center;
+
+}
+
+ul.food-group-ul > li > input{
+  width: 80%;
+  color: brown;
+  text-align: center;
+}
+
+
+
+
