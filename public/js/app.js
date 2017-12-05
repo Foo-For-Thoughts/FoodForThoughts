@@ -1,9 +1,9 @@
 $(document).ready(function() {
-
+  console.log("I'm in app")
   getMeals;
 
   //submit a meal
-  $(#submit).on("sumbit", handleMealDataSumbit)
+  $("#meal-form").on("sumbit", handleMealDataSumbit);
 
 
   function handleMealDataSumbit(event){
@@ -32,6 +32,7 @@ $(document).ready(function() {
   } // closing handleMealDataSubmit
 
   function getMeals(){
+    console.log("I'm in get meals")
     $.get("/api/meals", renderMealData)
   } // closing getMeals
 
@@ -40,4 +41,4 @@ $(document).ready(function() {
   } // closing renderMealData
 
 
-} // closing ready function
+})// closing ready function
