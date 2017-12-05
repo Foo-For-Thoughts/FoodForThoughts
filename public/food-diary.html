@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Code+Pro|Ubuntu" rel="stylesheet">
 </head>
 
-<body  ng-app="addMeal"  id="html-body">
-  <div class="container">
+<body  id="html-body" ng-app="addMeal" >
+  <div class="container" ng-app="ngAnimate">
   <!-- top row  -->
     <div class="row">
       <div class="col-md-9, col-xs-9">
@@ -23,32 +23,33 @@
         <div class="add-a-meal-container" ng-controller="AddingMeal">
           <h3 class="add-a-meal">Add a meal</h3>
           <form novalidate class="meal-form, add-a-meal-form">
-            <input class="add-a-meal-input" type="text" ng-model="mealLog.meal" />
-            <input class="add-btn" type="submit" ng-click="update(mealLog)" value="add" />
+            <input class="add-a-meal-input" type="text" ng-model="meal.name" />
+            <input class="add-btn" type="submit" ng-click="update(meal)" value="add" />
           </form>
         </div> <!-- add-a-meal-container-->
       </div> <!-- col-mid-9 -->   
-      <div style="border-style: solid;" class="pie-chart, col-md-3, col-xs-3">
-          <p>pie chart place holder</p>
+      <div class="pie-chart, col-md-3, col-xs-3">
+        <canvas id="big-pie-chart"></canvas>
       </div> <!-- pie-chart col-md-3 -->
     </div> <!-- top row -->
   <!-- middle row -->
     <div class="row">
       <div class="col-md-12, main-container" ng-controller="foodNamesCtrl" >
-        <form ng-submit="submit()">
-        <ul class="food-group-ul">
-          <li class="food-group-li" ng-repeat="x in foodGroups" ng-init = "data[$index] = x;" ng-model = "data[$index]">
-            <input type="number" ng-model = "data[$index].num" name="num"/> 
-            <h2>{{ x.group }}</h2>
-            <section style="background-color: lightblue;">
-              {{x.example}}
-            </section>
-        <!-- <input class="add-btn" type="submit" /> -->
-          <pre>data={{data}}</pre>
-          </li>
-        </ul>
-         <input type="submit" id="submit" value="Submit" />
-      </form>
+        <div class="form-container">
+          <p ng-bind="firstname"></p>
+          <form ng-submit="submit()">
+            <ul class="food-group-ul">
+              <li class="food-group-li" ng-repeat="x in foodGroups" ng-init = "data[$index] = x;" ng-model = "data[$index]">
+                <input type="number" ng-model = "data[$index].num" name="num"/> 
+                <h2>{{ x.group }}</h2>
+                <section style="background-color: lightblue;">
+                  {{x.example}}
+                </section>
+              </li>
+            </ul>
+           <input class="submit-btn" type="submit" id="submit" value="Submit" />
+          </form>
+        </div> <!--form container -->
       </div> <!-- main-container -->
     </div> <!-- middle row -->
     <div class="row">
@@ -63,16 +64,18 @@
   </footer> -->
 
 <script>
-  var mealData =  undefined;
+  var mealName =  undefined;
+  var mealData = {};
+
   var app= angular.module('addMeal', []);
 
     app.controller('AddingMeal', ['$scope', function($scope) {
       $scope.master = {};
-      $scope.mealData = {};
-      $scope.update = function(mealLog) {
-        console.log(mealLog)
-        $scope.master = angular.copy(mealLog);
-        mealData = mealLog;
+      $scope.mealName = {};
+      $scope.update = function(meal) {
+        console.log(meal)
+        $scope.master = angular.copy(meal);
+        mealName = meal;
       };
 
       $scope.reset = function() {
@@ -94,14 +97,50 @@
         {group:'Oil and Fat',example:'1 tsp soft margarine'},
       ];
       
-      // $scope.submit = function() {
-      //   console.log()
-      //     $scope.data.push();
-      // };
+      $scope.submit = function() {
+        mealData = {
+          user: "flying Unicorn",
+          meal: mealName.name,
+          protein: $scope.data[2].num,
+          carb: $scope.data[0].num,
+          fat: $scope.data[3].num,
+          veggies: $scope.data[1].num
 
+        }
+        console.log(mealData)
+      };
+        //console.log($scope.data[0], mealData);
     }]); //closing foodNameCtrl
 
-  console.log(mealData)  
+  var ctx = document.getElementById("big-pie-chart").getContext('2d');
+
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        //labels: ["Grain", "Vaggies/Fruits", "Protein", "Fat/Oil"],
+        datasets: [{
+            label: "today's consumption",
+            data: [33, 40, 15, 12],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+      },
+      options: {
+        cutoutPercentage: 0
+      }
+  });
+
 </script>
 </body>
 </html>
