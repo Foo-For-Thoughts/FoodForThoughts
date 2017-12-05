@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "1597532011zZ!",
-    "database": "blogger",
+    "database": "meal_library",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
