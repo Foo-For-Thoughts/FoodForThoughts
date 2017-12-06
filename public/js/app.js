@@ -1,6 +1,7 @@
 $(document).ready(function() {
-  console.log("I'm in app")
-  getMeals;
+  // console.log("I'm in app")
+
+  getMeals();
 
   //submit a meal
   $("#meal-form").on("sumbit", handleMealDataSumbit);
@@ -9,15 +10,15 @@ $(document).ready(function() {
   function handleMealDataSumbit(event){
     event.preventDefault();
 
-    var mealData = {
-      user: "FlyingUnicorn",
-      meal: "Late night snack",
-      protein: 0,
-      fat: 1,
-      carb: 2,
-      vaggie: 0
+    // var mealData = {
+    //   user: "FlyingUnicorn",
+    //   meal: "Late night snack",
+    //   protein: 0,
+    //   fat: 1,
+    //   carb: 2,
+    //   vaggie: 0
 
-    };
+    // };
 
     $.ajax({
       method: "POST",
@@ -29,16 +30,22 @@ $(document).ready(function() {
       getMeals;
     });
 
-  } // closing handleMealDataSubmit
+  }; // closing handleMealDataSubmit
 
   function getMeals(){
     console.log("I'm in get meals")
-    $.get("/api/meals", renderMealData)
-  } // closing getMeals
+    $.get("/meals", renderMealData)
+  }; // closing getMeals
+
+  function getAllMeals(){
+    console.log("I'm in get meals")
+    $.get("/meals/all", renderAllMealData)
+  }; // closing getMeals
 
   function renderMealData(){
     console.log("yay I'm in render meal data")
-  } // closing renderMealData
+  }; // closing renderMealData
+
 
 
 })// closing ready function
