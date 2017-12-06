@@ -81,6 +81,11 @@
   </footer> -->
 
 <script>
+  var username = getName();
+  function getName() {
+    return localStorage.getItem('loginInfo');
+  }
+
   var mealName =  undefined;
   var mealData = {};
 
@@ -116,7 +121,7 @@
       
       $scope.submit = function() {
         mealData = {
-          user: "flying Unicorn",
+          user: username,
           meal: mealName.name,
           protein: $scope.data[2].num,
           carb: $scope.data[0].num,

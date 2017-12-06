@@ -1,3 +1,34 @@
+.tablink {
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 1em;
+    width: 25%;
+}
+
+.tablink:hover {
+    background-color: #777;
+}
+
+/* Style the tab content */
+.tabcontent {
+    color: white;
+    display: none;
+    padding: 1em;
+    text-align: center;
+}
+
+#Today {background-color:red;}
+#This-Week {background-color:green;}
+#This-Month {background-color:blue;}
+#This-Year {background-color:orange;}
+
+/*-----starts here------*/
+
 * {
     --lightgreen-color: #E2EBE8;
     --darkgreen-color: #78ADBD;
@@ -9,6 +40,9 @@
     --olive-color: #EDD023;
 }
 
+hr {
+  border-top: 2px solid var(--darkgreen-color);
+}
 #html-body {
   background-color: var(--lightgreen-color);
   color: var(--darkgreen-color);
@@ -63,18 +97,6 @@
   margin-bottom: 2em;
 }
 
-.add-a-meal-input {
-  width: 75%;
-  border-radius: 20px;
-  -webkit-appearance: textfield;
-  -webkit-rtl-ordering: logical;
-  cursor: auto;
-  padding: 0.5em;
-  border-width: 1px;
-  border-style: solid;
-  border-color: var(--darkgreen-color);
-}
-
 /* button settings */
 .btn {
   height: 2.3em;
@@ -112,24 +134,37 @@
   float: right;
 }
 
+.signup-btn {
+  min-width: 25%;
+  margin-left: 40%;
+  padding: 5px;
+}
+
+/* form containers */
+
 .form-container {
   background-color: white;
   padding-bottom: 2em;
   height: 70vh;
 }
 
-.food-group-ul {
-  list-style: none; 
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: 1em; 
-  padding: 2em;
+.signupform-container {
+  margin-top: 2em;
 }
 
-.food-group-li {
-  width: 20%;
-  text-align: center;
 
+/*input filed style*/
+
+.add-a-meal-input {
+  width: 75%;
+  border-radius: 20px;
+  -webkit-appearance: textfield;
+  -webkit-rtl-ordering: logical;
+  cursor: auto;
+  padding: 0.5em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--darkgreen-color);
 }
 
 input:focus {
@@ -188,4 +223,30 @@ input.userlogin-input:focus {
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
 }
 
+/*other styling*/
 
+.our-mission {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.food-group-ul {
+  list-style: none; 
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 1em; 
+  padding: 2em;
+}
+
+.food-group-li {
+  width: 20%;
+  text-align: center;
+
+}
+
+.onion {
+    margin-top: -10em;
+    margin-left: 2em;
+    transform: rotate(-10deg);
+}
+}
