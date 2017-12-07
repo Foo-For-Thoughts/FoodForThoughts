@@ -1,3 +1,34 @@
+.tablink {
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 1em;
+    width: 25%;
+}
+
+.tablink:hover {
+    background-color: #777;
+}
+
+/* Style the tab content */
+.tabcontent {
+    color: white;
+    display: none;
+    padding: 1em;
+    text-align: center;
+}
+
+#Today {background-color:red;}
+#This-Week {background-color:green;}
+#This-Month {background-color:blue;}
+#This-Year {background-color:orange;}
+
+/*-----starts here------*/
+
 * {
     --lightgreen-color: #E2EBE8;
     --darkgreen-color: #78ADBD;
@@ -9,24 +40,213 @@
     --olive-color: #EDD023;
 }
 
-
-
-#div {
-  border: var(--olive-color); 
-  border-style: solid;
+hr {
+  border-top: 2px solid var(--darkgreen-color);
 }
-
-
 #html-body {
   background-color: var(--lightgreen-color);
   color: var(--darkgreen-color);
 }
+.pie-chart {
+  margin-top: 3em;
+}
+#big-pie-chart {
+  margin-top: 2em;
+  display: block;
+  width: 100%;
+  height: 110%;
+}
 
-.footer {
+.white-footer {
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background: white;
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
+}
+
+.big-header {
+  padding-top: 1em;
+  font-size: 4.3em;
+  /*font-family: 'Ubuntu', sans-serif;*/
+  /*font-family: 'Nunito', sans-serif;*/
+  font-family: 'Source Code Pro', monospace;
+}
+
+#username{
+  height: 2em;
+}
+.add-a-meal-container {
+  /*font-family: 'Nunito', sans-serif;*/
+  font-family: 'Source Code Pro', monospace;
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.add-a-meal {
+  margin-left: 5%;
+  border-bottom: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--darkgreen-color);
+}
+
+.add-a-meal-form {
+  margin-left: 5%;
+  margin-bottom: 2em;
+}
+
+/* button settings */
+.btn {
+  height: 2.3em;
+  border-radius: 25px;
+  border-color: var(--darkgreen-color);
+
+}
+
+.add-btn {
+  width: 20%;
+    /*to do: fix margin on the right;*/
+}
+
+.btn.focus, .btn:hover, .btn:focus, .btn:active {
+   outline: none !important;
+   color: var(--darkgreen-color) !important;
+}
+
+.add-btn:focus {
+  padding: 0.5em;
+  outline: -webkit-focus-ring-color var(--darkgreen-color) 1px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0px 0px 6px 2px rgba(120, 173, 189, 0.52);;
+  box-shadow: inset 0 0px 0px rgb(255, 255, 255), 0px 0px 6px 2px rgba(120, 173, 189, 0.52);
+}
+
+.submit-btn {
+  display: block;
+  width: 10%;
+  margin-left: 85%;
+  margin-top: 1em;
+}
+
+.login-btn {
+  width: 20%;
+  float: right;
+}
+
+.signup-btn {
+  min-width: 25%;
+  margin-left: 40%;
+  padding: 5px;
+}
+
+/* form containers */
+
+.form-container {
   background-color: white;
+  padding-bottom: 2em;
+  height: 70vh;
+}
+
+.signupform-container {
+  margin-top: 2em;
+}
+
+
+/*input filed style*/
+
+.add-a-meal-input {
+  width: 75%;
+  border-radius: 20px;
+  -webkit-appearance: textfield;
+  -webkit-rtl-ordering: logical;
+  cursor: auto;
+  padding: 0.5em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--darkgreen-color);
+}
+
+input:focus {
+  outline: -webkit-focus-ring-color var(--darkgreen-color) 1px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0px 0px 6px 2px rgba(120, 173, 189, 0.52);;
+  box-shadow: inset 0 0px 0px rgb(255, 255, 255), 0px 0px 6px 2px rgba(120, 173, 189, 0.52);;
+}
+
+input::placeholder {
+  color: rgba(120, 173, 189, 0.65);
+}
+ul.food-group-ul > li > input {
+  border: 0.2px;
+  border-style: solid;
+  border-color: rgba(120, 173, 189, 0.33);
+  width: 80%;
+  color: brown;
+  text-align: center;
+  padding: 0.4em;
+}
+
+ul.food-group-ul > li > input:focus {
+  border: 1px;
+ }
+
+
+input.userlogin-input {
+  border-radius: 20px !important;
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid var(--darkgreen-color);
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  margin-bottom: 1em;
+}
+
+input.userlogin-input:focus {
+    border-color: var(--green-color);
+    border-top-color: var(--green-color);
+    border-right-color: var(--green-color);
+    border-bottom-color: var(--green-color);
+    border-left-color: var(--green-color);
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+}
+
+/*other styling*/
+
+.our-mission {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.food-group-ul {
+  list-style: none; 
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 1em; 
+  padding: 2em;
+}
+
+.food-group-li {
+  width: 20%;
+  text-align: center;
+
+}
+
+.onion {
+    margin-top: -10em;
+    margin-left: 2em;
+    transform: rotate(-10deg);
+}
 }

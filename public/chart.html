@@ -2,7 +2,7 @@
 <html lang="en" ng-app>
 <head>
   <meta charset="UTF-8">
-  <title>Food for Thoughts - Diary</title>
+  <title>Food for Thoughts - charts</title>
   <!-- Latest compiled and minified CSS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -10,15 +10,194 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
   <link rel="stylesheet" href="css/style.css"> 
+  <!-- <script src="./js/app.js"></script> -->
+  <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Code+Pro|Ubuntu" rel="stylesheet">
 </head>
 <body id="html-body">
   <div class="container">
-    <p>hello</p>
+    <div class="row">
+        <div class="big-header">
+          <p class="text-right">Analysis</p>
+        </div> <!-- today's date -->
+    </div> <!-- first row -->
+    <div class="row">
+      <div id="Today" class="tabcontent">
+        <h3>Today</h3>
+        <p>Last 24hrs</p>
+      </div>
+      <div id="This-Week" class="tabcontent">
+        <h3>This Week</h3>
+        <p>This Week is the capital of France.</p> 
+      </div>
+
+      <div id="This-Month" class="tabcontent">
+        <h3>This Month</h3>
+        <p>This Month is the capital of Japan.</p>
+      </div>
+
+      <div id="This-Year" class="tabcontent">
+        <h3>This Year</h3>
+        <p>This-Year is the capital of Norway.</p>
+      </div>
+
+      <button class="tablink" onclick="openChart('Today', this, 'red')" id="defaultOpen">Today</button>
+      <button class="tablink" onclick="openChart('This-Week', this, 'green')">This Week</button>
+      <button class="tablink" onclick="openChart('This-Month', this, 'blue')">This Month</button>
+      <button class="tablink" onclick="openChart('This-Year', this, 'orange')">This Year</button>
+
+    </div>
+    <div class="row">
+      <canvas id="progress-chart"></canvas>
+    </div> <!-- range select  -->
   </div><!-- closing container -->
-  <footer class="footer">
+<!--   <footer class="footer">
   <p>cool things like github and main page pr presentation etc</p>
   <p>hello I'm {{ 5 + 5 }} testing anguler</p>
-  </footer>
+  </footer> -->
 <!--   put JS links in here -->
+<script>
+// chart navigation
+function openChart(range,elmnt,color) {
+  //call data sort function 
+  buildChart(range);
+
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+    }
+    document.getElementById(range).style.display = "block";
+    elmnt.style.backgroundColor = color;
+
+}
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+//test data
+
+var mealData = {
+      0: {
+        user: "Yoko",
+        meal: "breakfast",
+        protein: 2,
+        carb: 3,
+        fat: 1,
+        veggies: 0,
+        date: '2017-12-23'
+      },
+      1: {
+        user: "Yoko",
+        meal: "dinner",
+        protein: 1,
+        carb: 6,
+        fat: 0,
+        veggies: 4,
+        date: '2017-12-23'
+      },
+      2: {
+        user: "Yoko",
+        meal: "snack",
+        protein: 0,
+        carb: 3,
+        fat: 1,
+        veggies: 0,
+        date: '2017-12-24'
+      },
+      3: {
+        user: "Yoko",
+        meal: "late night snack",
+        protein: 0,
+        carb: 3,
+        fat: 2,
+        veggies: 0,
+        date: '2017-12-24'
+      },
+      4: {
+        user: "Yoko",
+        meal: "breakfast",
+        protein: 2,
+        carb: 3,
+        fat: 1,
+        veggies: 0,
+        date: '2017-12-25'
+      },
+      5:{
+        user: "Yoko",
+        meal: "lunch",
+        protein: 3,
+        carb: 3,
+        fat: 1,
+        veggies: 6,
+        date: '2017-12-25'
+      },
+      6: {
+        user: "Yoko",
+        meal: "dinner",
+        protein: 5,
+        carb: 5,
+        fat: 1,
+        veggies: 6,
+        date: '2017-12-25'
+      },
+      7: {
+        user: "Yoko",
+        meal: "breakfast",
+        protein: 4,
+        carb: 3,
+        fat: 1,
+        veggies: 1,
+        date: '2017-12-26'
+      },
+      8: {
+        user: "Yoko",
+        meal: "snack",
+        protein: 2,
+        carb: 1,
+        fat: 0,
+        veggies: 0,
+        date: '2017-12-26'
+      }
+    }//sample meal data
+
+  function buildChart(range){
+    var today = new Date()
+
+  }  
+
+  var ctx = document.getElementById("progress-chart").getContext('2d');
+
+  var myChart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [{
+            label: "protein",
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30, 45],
+        },
+        {label: "fat",
+            backgroundColor: 'rgb(255, 200, 102)',
+            borderColor: 'rgb(255, 200, 102)',
+            data: [0, 10, 5, 42, 10, 40, 15],}
+        ]},
+
+    // Configuration options go here
+    options: {scales: {
+            yAxes: [{
+                stacked: true
+            }]
+        }}
+  });
+
+</script>
+
 </body>
 </html>

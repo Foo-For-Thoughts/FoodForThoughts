@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Food for Thoughts - Login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <script src="./js/app.js"></script> -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Code+Pro|Ubuntu" rel="stylesheet">
+</head>
+<body id="html-body">
+  <div class="container"  ng-app="user-login" ng-controller="login">
+    <div class="row">
+      <div class="big-header">
+        <p id="greeting"></p>
+        <p class="text-right">Welcome Back</p>
+        <p class="text-right" id="username"></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+        <img class='onion' src="../onion.png" alt="onion">
+      </div>
+      <div ng-controller="login" class="col-md-6 col-sm-6">
+        <form novalidate class="login-form">
+          <input type="text" class="userlogin-input" placeholder="Username" aria-describedby="sizing-addon1" ng-model="user.name" />
+          <input type="text" class="userlogin-input" placeholder="password" aria-describedby="sizing-addon1" ng-model="user.password" />
+          <input class="btn login-btn" type="submit" ng-click="update(user)" value="login" />
+      </form>
+<!--       <pre>user = {{user | json}}</pre>
+      <pre>master = {{master | json}}</pre> -->
+      </div>
+      <div class="col-md-3 col-sm-3">
+        
+      </div>
+    </div>
+
+ <!-- login controller -->
+<!--   <footer class="footer">
+  <p>cool things like github and main page pr presentation etc</p>
+  <p>hello I'm {{ 5 + 5 }} testing anguler</p>
+  </footer> -->
+
+<script>
+
+  
+  var username = getName();
+
+  function getName() {
+    return localStorage.getItem('loginInfo');
+  }
+  if (username){
+    $("#username").html(username);
+  }
+  // });
+  var userLogin = {};
+  var ctxLI = angular.module('user-login', []);
+    ctxLI.controller('login', ['$scope', function($scope) {
+      $scope.master = {};
+      $scope.user = {};
+
+      //when form is submit, store user to master 
+      //and store user to the local storage 
+      $scope.update = function(user) {
+        $scope.master = angular.copy(user);
+        userLogin = $scope.master;
+        localStorage.setItem('loginInfo', user.name);
+        $scope.user = angular.copy();
+      };
+
+      // $scope.reset = function() {
+      //   $scope.user = angular.copy($scope.master);
+      // };
+      
+    }]);
+
+  // if (username correct) {
+  //   go to the next page
+  // }
+
+  var today = new Date(); 
+  var time = today.getHours();
+  setGreeting(time)
+  function setGreeting(time){
+    if (time < 12) {
+      $("#greeting").html('Good morning');
+    } else if (time < 16) {
+      $("#greeting").html('Good afternoon');
+    }
+    else {
+      $("#greeting").html('Good evening');
+    }
+  };
+</script>
+</body>
+</html>
+
+<!-- 
+Copyright 2017 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->

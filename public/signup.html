@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Food for Thoughts - sing up</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <script src="./js/app.js"></script> -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Code+Pro|Ubuntu" rel="stylesheet">
+</head>
+<body id="html-body">
+  <div class="container"  ng-app="user-login" ng-controller="login">
+    <div class="row">
+      <div class="big-header">
+        <p class="text-center">Welcome to Food for Thoughts</p>
+      </div>
+        <hr>
+      <div class="text-center" >
+        <h4 our-mission">Let's take the first step of your healthy eating.</h4>
+          <p>There are many apps that can track your food consumption, but they require lot of work and it's overwhelming. <br>Many of us stop using them after a wile.</p> 
+          <p>Some dieters become too obsessed with numbers and their emotional health is in danger.</p>
+          <p>we wanted to strike the right balance and build something sustainable, easy to use, and effective. <br>Our analysis chart can show your progress on one screen.</p>
+          <p>Together, we will build our healthy food habit for our healthy life style.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-sm-4">
+        
+      </div>
+      <div ng-controller="login" class="col-md-4 col-sm-4 signupform-container">
+        <form novalidate class="login-form">
+          <input type="text" class="userlogin-input" placeholder="Username" aria-describedby="sizing-addon1" ng-model="user.name" />
+          <input type="text" class="userlogin-input" placeholder="password" aria-describedby="sizing-addon1" ng-model="user.password" />
+          <input class="btn signup-btn" type="submit" ng-click="update(user)" value="Let's Go!" />
+      </form>
+<!--       <pre>user = {{user | json}}</pre>
+      <pre>userInfo = {{userInfo | json}}</pre> -->
+      </div>
+      <div class="col-md-4 col-sm-4"> 
+      </div>
+    </div>
+    <img class='onion' src="../onion.png" alt="onion">
+ <!-- login controller -->
+<!--   <footer class="footer">
+  <p>cool things like github and main page pr presentation etc</p>
+  <p>hello I'm {{ 5 + 5 }} testing anguler</p>
+  </footer> -->
+
+<script>
+
+  var userSignup = {};
+  var ctxLI = angular.module('user-login', []);
+    ctxLI.controller('login', ['$scope', function($scope) {
+      $scope.userInfo = {};
+      $scope.user = {};
+
+      //when form is submit, store user to userInfo 
+      //and store user to the local storage 
+      $scope.update = function(user) {
+        $scope.userInfo = angular.copy(user);
+        userSignup = $scope.userInfo;
+        localStorage.setItem('loginInfo', user.name);
+        $scope.user = angular.copy();
+      };
+
+      
+    }]);
+
+  //on submit go to the food diary page  
+
+</script>
+</body>
+</html>
+
+<!-- 
+Copyright 2017 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
