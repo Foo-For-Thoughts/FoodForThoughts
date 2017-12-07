@@ -198,25 +198,14 @@ var mealData = [
       }
     ]//sample meal data
 
-// these date will be used across the html files
-  var today = new Date()
-  var day = today.getDate();
-  var month = today.getMonth() + 1;
-  var year = today.getFullYear();
-  var dayOftheWeek = today.getDay();
-  if(day < 10){
-    day = "0"+day
-  }
-  var todaysDate = year +"-"+ month + "-" + day;
+
 
   function buildChart(range){
 
     if (range === "Today"){
       loadChart(todayChart);
     } else if (range === "This-Week") {
-      // thisWeekChart();
-
-      console.log('this week')
+      thisWeekChart();
     } else if (range === "This-Month") {
       // thisMonthChart();
       console.log('this month')
@@ -227,8 +216,24 @@ var mealData = [
 
   };
 
+  // function getTodaysDate(date){
+  
+  //   var day = date.getDate();
+  //   var month = date.getMonth() + 1;
+  //   var year = date.getFullYear();
+  //   var dayOftheWeek = date.getDay();
+  //   if(day < 10){
+  //     day = "0"+day
+  //   }
+  //   var formattedDate = year +"-"+ month + "-" + day;
+  //  return formattedDate
+  // };
+
 
   function todayChart(){
+  //build and pass today's meal data to chart 
+    var todaysDate = new Date();
+    console.log(todaysDate = mealData[14].time_created)
     //make labels and data sets
     var labelArray = [];
     var proteinData = [];
@@ -236,7 +241,7 @@ var mealData = [
     var fatData = [];
     var veggiesData = [];
     for (var i = mealData.length-1; i > 0; i--) {
-      if(todaysDate === mealData[i].time_created.slice(0,10)){
+        if(todaysDate === mealData[i].time_created){
        labelArray.push(mealData[i].meal);
        proteinData.push(mealData[i].protein);
        carbData.push(mealData[i].carb);
@@ -249,12 +254,22 @@ var mealData = [
     ]
   };
 
+  function thisWeekChart(){
+  //build and pass this week's emal data to chart
+  
+
+  };
+
   function loadChart(callback){
     
     var chartData = callback();
-    console.log(callback)
+    console.log(chartData)
     var labelsChartData = chartData[0].reverse();
-    // var proteinChartData = chartData[0].reverse();
+    var proteinChartData = chartData[1].reverse();
+    var carbChartData = chartData[2].reverse();
+    var fatChartData = chartData[3].reverse();
+    var veggiesChartData = chartData[4].reverse();
+    console.log(proteinChartData)
     var ctx = document.getElementById("progress-chart").getContext('2d');
 
     var myChart = new Chart(ctx, {
@@ -263,30 +278,30 @@ var mealData = [
 
       // The data for our dataset
       data: {
-          labels: labelsData,
+          labels: labelsChartData,
           datasets: [{
-              label: "protein",
+              label: "carb",
               backgroundColor: 'rgb(255, 99, 132)',
               borderColor: 'rgb(255, 99, 132)',
-              data: [0, 10, -5, 2, 20, 22, 18],
-          },
-          {
-            label: "fat",
-            backgroundColor: 'rgb(255, 200, 102)',
-            borderColor: 'rgb(255, 200, 102)',
-            data: [4, 10, -7, 42, -10, 40, 15],
-          },
-          {
-            label: "carb",
-            backgroundColor: 'rgb(212, 180, 102)',
-            borderColor: 'rgb(212, 180, 102)',
-            data: [7, -17, 23, 42, 10, 40, -15],
+              data: carbChartData,
           },
           {
             label: "veggies",
+            backgroundColor: 'rgb(255, 200, 102)',
+            borderColor: 'rgb(255, 200, 102)',
+            data: veggiesChartData,
+          },
+          {
+            label: "protein",
+            backgroundColor: 'rgb(212, 180, 102)',
+            borderColor: 'rgb(212, 180, 102)',
+            data: proteinChartData,
+          },
+          {
+            label: "fat",
             backgroundColor: 'rgb(245, 180, 102)',
             borderColor: 'rgb(245, 180, 102)',
-            data: [3, 21, 9, 42, -10, 40, 15],
+            data: fatChartData,
           }
 
           ]},
