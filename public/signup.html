@@ -10,7 +10,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <!-- <script src="./js/app.js"></script> -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Code+Pro|Ubuntu" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Patrick+Hand|Source+Code+Pro|Comfortaa" rel="stylesheet">
 </head>
 <body id="html-body">
   <div class="container"  ng-app="user-login" ng-controller="login">
@@ -33,7 +33,7 @@
       </div>
       <div ng-controller="login" class="col-md-4 col-sm-4 signupform-container">
         <form novalidate class="login-form">
-          <input type="text" class="userlogin-input" placeholder="Username" aria-describedby="sizing-addon1" ng-model="user.name" />
+          <input type="text" class="userlogin-input" placeholder="Username" aria-describedby="sizing-addon1" ng-model="user.username" />
           <input type="text" class="userlogin-input" placeholder="password" aria-describedby="sizing-addon1" ng-model="user.password" />
           <input class="btn signup-btn" type="submit" ng-click="update(user)" value="Let's Go!" />
       </form>
@@ -52,7 +52,7 @@
 
 <script>
 
-  var userSignup = {};
+  var newUser = {};
   var ctxLI = angular.module('user-login', []);
     ctxLI.controller('login', ['$scope', function($scope) {
       $scope.userInfo = {};
@@ -62,14 +62,39 @@
       //and store user to the local storage 
       $scope.update = function(user) {
         $scope.userInfo = angular.copy(user);
-        userSignup = $scope.userInfo;
-        localStorage.setItem('loginInfo', user.name);
+        userUser = $scope.userInfo;
+        localStorage.setItem('loginInfo', user.username);
         $scope.user = angular.copy();
+        $.ajax("/auth/signup", {
+            type: "POST",
+            data: newUser
+          }).done(function(data){
+            console.log(data)
+          })
       };
-
       
     }]);
 
+  //   $(".login-form").on("submit", function(event) {
+  //   event.preventDefault()
+
+  //   var newUser = {
+  //     username: $("#username").val().trim(),
+  //     password: $("#password").val().trim()
+
+  //   };
+
+  //   console.log(newUser)
+
+  //   // Send the POST request.
+  //   $.ajax("/auth/signup", {
+  //     type: "POST",
+  //     data: newUser
+  //   }).done(function(data){
+  //     console.log(data)
+  //   })
+
+  // });
   //on submit go to the food diary page  
 
 </script>

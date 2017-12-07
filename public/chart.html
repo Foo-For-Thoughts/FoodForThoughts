@@ -11,7 +11,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
   <link rel="stylesheet" href="css/style.css"> 
   <!-- <script src="./js/app.js"></script> -->
-  <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Code+Pro|Ubuntu" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand|Source+Code+Pro" rel="stylesheet">
 </head>
 <body id="html-body">
   <div class="container">
@@ -23,27 +23,28 @@
     <div class="row">
       <div id="Today" class="tabcontent">
         <h3>Today</h3>
-        <p>Last 24hrs</p>
+        <p>How are you today?</p>
       </div>
+
       <div id="This-Week" class="tabcontent">
         <h3>This Week</h3>
-        <p>This Week is the capital of France.</p> 
+        <p>This Week is looking great!</p> 
       </div>
 
       <div id="This-Month" class="tabcontent">
         <h3>This Month</h3>
-        <p>This Month is the capital of Japan.</p>
+        <p>How did you do this Month?</p>
       </div>
 
       <div id="This-Year" class="tabcontent">
         <h3>This Year</h3>
-        <p>This-Year is the capital of Norway.</p>
+        <p>This Year's progress</p>
       </div>
 
-      <button class="tablink" onclick="openChart('Today', this, 'red')" id="defaultOpen">Today</button>
-      <button class="tablink" onclick="openChart('This-Week', this, 'green')">This Week</button>
-      <button class="tablink" onclick="openChart('This-Month', this, 'blue')">This Month</button>
-      <button class="tablink" onclick="openChart('This-Year', this, 'orange')">This Year</button>
+    <button class="tablink" onclick="openTabs('Today', this, 'red')" id="defaultOpen">Today</button>
+    <button class="tablink" onclick="openTabs('This-Week', this, 'green')">This Week</button>
+    <button class="tablink" onclick="openTabs('This-Month', this, 'blue')">This Month</button>
+    <button class="tablink" onclick="openTabs('This-Year', this, 'orange')">This Year</button>
 
     </div>
     <div class="row">
@@ -56,10 +57,252 @@
   </footer> -->
 <!--   put JS links in here -->
 <script>
-// chart navigation
-function openChart(range,elmnt,color) {
-  //call data sort function 
-  buildChart(range);
+
+//test data
+
+var mealData = [
+      {
+        "user": "Yoko",
+        "meal": "breakfast",
+        "protein": 0,
+        "carb": 5,
+        "fat": 0,
+        "veggies": 1,
+        "time_created": "2017-11-28T23:16:13.000Z"
+      },
+      {
+        "user": "Yoko",
+        "meal": "lunch",
+        "protein": 0,
+        "carb": 5,
+        "fat": 0,
+        "veggies": 1,
+        "time_created": '2017-11-28T23:16:13.000Z'
+      },
+      {
+        "user": "Yoko",
+        "meal": "snack",
+        "protein": 0,
+        "carb": 5,
+        "fat": 0,
+        "veggies": 1,
+        "time_created": '2017-11-28T23:16:13.000Z'
+      },
+      {
+        "user": "Yoko",
+        "meal": "breakfast",
+        "protein": 0,
+        "carb": 5,
+        "fat": 0,
+        "veggies": 1,
+        "time_created": '2017-11-29T23:16:13.000Z'
+      },
+      {
+        "user": "Yoko",
+        "meal": "breakfast",
+        "protein": 2,
+        "carb": 3,
+        "fat": 1,
+        "veggies": 2,
+        "time_created": '2017-11-29T23:16:13.000Z'
+      },
+      {
+        "user": "Yoko",
+        "meal": "breakfast",
+        "protein": 2,
+        "carb": 3,
+        "fat": 1,
+        "veggies": 0,
+        "time_created": '2017-11-30T23:16:13.000Z'
+      },
+      {
+        "user": "Yoko",
+        "meal": "breakfast",
+        "protein": 2,
+        "carb": 3,
+        "fat": 1,
+        "veggies": 0,
+        "time_created": '2017-12-01T23:16:13.000Z'
+      },
+      {
+        "user": "Yoko",
+        "meal": "dinner",
+        "protein": 1,
+        "carb": 6,
+        "fat": 0,
+        "veggies": 4,
+        "time_created": '2017-12-02T23:16:13.000Z'
+      },
+      {
+        "user": "Yoko",
+        "meal": "snack",
+        "protein": 0,
+        "carb": 3,
+        "fat": 1,
+        "veggies": 0,
+        "time_created": '2017-12-03T23:16:13.000Z'
+      },
+      {
+        "user": "Yoko",
+        "meal": "breakfast",
+        "protein": 0,
+        "carb": 3,
+        "fat": 2,
+        "veggies": 0,
+        "time_created": '2017-12-04T23:16:13.000Z'
+      },
+      {
+        "user": "Yoko",
+        "meal": "Dinner",
+        "protein": 2,
+        "carb": 3,
+        "fat": 1,
+        "veggies": 0,
+        "time_created": '2017-12-04T23:16:13.000Z'
+      },
+      {
+        "user": "Yoko",
+        "meal": "breakfast",
+        "protein": 3,
+        "carb": 3,
+        "fat": 1,
+        "veggies": 6,
+        "time_created": '2017-12-06T23:16:13.000Z'
+      },
+      {
+        "user": "Yoko",
+        "meal": "Lunch",
+        "protein": 5,
+        "carb": 5,
+        "fat": 1,
+        "veggies": 6,
+        "time_created": '2017-12-06T23:16:13.000Z'
+      },
+      {
+        "user": "Yoko",
+        "meal": "Dinner",
+        "protein": 4,
+        "carb": 3,
+        "fat": 1,
+        "veggies": 1,
+        "time_created": '2017-12-06T23:16:13.000Z'
+      },
+      {
+        "user": "Yoko",
+        "meal": "late night snack",
+        "protein": 2,
+        "carb": 1,
+        "fat": 0,
+        "veggies": 0,
+        "time_created": '2017-12-06T23:16:13.000Z'
+      }
+    ]//sample meal data
+
+// these date will be used across the html files
+  var today = new Date()
+  var day = today.getDate();
+  var month = today.getMonth() + 1;
+  var year = today.getFullYear();
+  var dayOftheWeek = today.getDay();
+  if(day < 10){
+    day = "0"+day
+  }
+  var todaysDate = year +"-"+ month + "-" + day;
+
+  function buildChart(range){
+
+    if (range === "Today"){
+      loadChart(todayChart);
+    } else if (range === "This-Week") {
+      // thisWeekChart();
+
+      console.log('this week')
+    } else if (range === "This-Month") {
+      // thisMonthChart();
+      console.log('this month')
+    } else if (range === "This-Year") {
+      // thisYearChart();
+      console.log('this year')
+    }
+
+  };
+
+
+  function todayChart(){
+    //make labels and data sets
+    var labelArray = [];
+    var proteinData = [];
+    var carbData = [];
+    var fatData = [];
+    var veggiesData = [];
+    for (var i = mealData.length-1; i > 0; i--) {
+      if(todaysDate === mealData[i].time_created.slice(0,10)){
+       labelArray.push(mealData[i].meal);
+       proteinData.push(mealData[i].protein);
+       carbData.push(mealData[i].carb);
+       fatData.push(mealData[i].fat);
+       veggiesData.push(mealData[i].veggies);
+      }
+    }
+    return [
+      labelArray, proteinData, carbData, fatData, veggiesData
+    ]
+  };
+
+  function loadChart(callback){
+    
+    var chartData = callback();
+    console.log(callback)
+    var labelsChartData = chartData[0].reverse();
+    // var proteinChartData = chartData[0].reverse();
+    var ctx = document.getElementById("progress-chart").getContext('2d');
+
+    var myChart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'line',
+
+      // The data for our dataset
+      data: {
+          labels: labelsData,
+          datasets: [{
+              label: "protein",
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: [0, 10, -5, 2, 20, 22, 18],
+          },
+          {
+            label: "fat",
+            backgroundColor: 'rgb(255, 200, 102)',
+            borderColor: 'rgb(255, 200, 102)',
+            data: [4, 10, -7, 42, -10, 40, 15],
+          },
+          {
+            label: "carb",
+            backgroundColor: 'rgb(212, 180, 102)',
+            borderColor: 'rgb(212, 180, 102)',
+            data: [7, -17, 23, 42, 10, 40, -15],
+          },
+          {
+            label: "veggies",
+            backgroundColor: 'rgb(245, 180, 102)',
+            borderColor: 'rgb(245, 180, 102)',
+            data: [3, 21, 9, 42, -10, 40, 15],
+          }
+
+          ]},
+
+      // Configuration options go here
+      options: {scales: {
+              yAxes: [{
+                  stacked: true
+              }]
+          }}
+    });
+  };
+
+// Tabs navigation
+
+function openTabs(range,elmnt,color) {
 
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -73,129 +316,11 @@ function openChart(range,elmnt,color) {
     document.getElementById(range).style.display = "block";
     elmnt.style.backgroundColor = color;
 
+    buildChart(range);
 }
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 
-//test data
-
-var mealData = {
-      0: {
-        user: "Yoko",
-        meal: "breakfast",
-        protein: 2,
-        carb: 3,
-        fat: 1,
-        veggies: 0,
-        date: '2017-12-23'
-      },
-      1: {
-        user: "Yoko",
-        meal: "dinner",
-        protein: 1,
-        carb: 6,
-        fat: 0,
-        veggies: 4,
-        date: '2017-12-23'
-      },
-      2: {
-        user: "Yoko",
-        meal: "snack",
-        protein: 0,
-        carb: 3,
-        fat: 1,
-        veggies: 0,
-        date: '2017-12-24'
-      },
-      3: {
-        user: "Yoko",
-        meal: "late night snack",
-        protein: 0,
-        carb: 3,
-        fat: 2,
-        veggies: 0,
-        date: '2017-12-24'
-      },
-      4: {
-        user: "Yoko",
-        meal: "breakfast",
-        protein: 2,
-        carb: 3,
-        fat: 1,
-        veggies: 0,
-        date: '2017-12-25'
-      },
-      5:{
-        user: "Yoko",
-        meal: "lunch",
-        protein: 3,
-        carb: 3,
-        fat: 1,
-        veggies: 6,
-        date: '2017-12-25'
-      },
-      6: {
-        user: "Yoko",
-        meal: "dinner",
-        protein: 5,
-        carb: 5,
-        fat: 1,
-        veggies: 6,
-        date: '2017-12-25'
-      },
-      7: {
-        user: "Yoko",
-        meal: "breakfast",
-        protein: 4,
-        carb: 3,
-        fat: 1,
-        veggies: 1,
-        date: '2017-12-26'
-      },
-      8: {
-        user: "Yoko",
-        meal: "snack",
-        protein: 2,
-        carb: 1,
-        fat: 0,
-        veggies: 0,
-        date: '2017-12-26'
-      }
-    }//sample meal data
-
-  function buildChart(range){
-    var today = new Date()
-
-  }  
-
-  var ctx = document.getElementById("progress-chart").getContext('2d');
-
-  var myChart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
-
-    // The data for our dataset
-    data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [{
-            label: "protein",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
-        },
-        {label: "fat",
-            backgroundColor: 'rgb(255, 200, 102)',
-            borderColor: 'rgb(255, 200, 102)',
-            data: [0, 10, 5, 42, 10, 40, 15],}
-        ]},
-
-    // Configuration options go here
-    options: {scales: {
-            yAxes: [{
-                stacked: true
-            }]
-        }}
-  });
 
 </script>
 

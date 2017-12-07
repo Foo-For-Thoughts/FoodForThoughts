@@ -46,6 +46,7 @@ hr {
 #html-body {
   background-color: var(--lightgreen-color);
   color: var(--darkgreen-color);
+  font-family: 'Patrick Hand', cursive;
 }
 .pie-chart {
   margin-top: 3em;
@@ -69,8 +70,6 @@ hr {
 .big-header {
   padding-top: 1em;
   font-size: 4.3em;
-  /*font-family: 'Ubuntu', sans-serif;*/
-  /*font-family: 'Nunito', sans-serif;*/
   font-family: 'Source Code Pro', monospace;
 }
 
