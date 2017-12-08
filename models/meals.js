@@ -1,11 +1,11 @@
 module.exports = function(sequelize, DataTypes) {
   var Meals = sequelize.define("meals", {
-    date: {
-      type: DataTypes.DATE,
-      // AllowNull is a flag that restricts a todo from being entered if it doesn't
-      // have a text value
-      allowNull: false
-    },
+    // date: {
+    //   type: DataTypes.DATE,
+    //   // AllowNull is a flag that restricts a todo from being entered if it doesn't
+    //   // have a text value
+    //   allowNull: false
+    // },
     meal: {
       type: DataTypes.STRING,
       allowNull: false
@@ -21,10 +21,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     fruit_veg_servings: {
       type: DataTypes.INTEGER
-    },
-    user_id: {
-      type: DataTypes.INTEGER
     }
+    // ,
+    // user_id: {
+    //   type: DataTypes.INTEGER
+    // }
   });
 
   Meals.associate = function(models) {

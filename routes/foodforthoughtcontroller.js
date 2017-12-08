@@ -45,6 +45,19 @@ module.exports = function(app, passport) {
 					})
 	})
 
+	app.post('/postmeals', function(req, res){
+		db.meals.create({
+			userId: req.body.user_id,
+			meal: req.body.meal,
+			protein_servings: req.body.protein,
+			fat_servings: req.body.fat,
+			carb_servings: req.body.carb,
+			fruit_veg_servings: req.body.veggies
+		}).then(function(data){
+		res.send(data)
+		})
+	})
+
 	app.get('/meals', function(req, res) {
 
 		console.log(req.user)
@@ -53,9 +66,7 @@ module.exports = function(app, passport) {
 
 		db.meals.findAll({
 			where: {
-				userid: req.params.userid,
-				date: date
-			}
+				userid: req.params.userid			}
 		}).then(function(meals) {
 			res.json(meals);
 		});

@@ -4,21 +4,22 @@ $(document).ready(function() {
   getMeals();
 
   //submit a meal
-  $("#meal-form").on("sumbit", handleMealDataSumbit);
+  $("#meal-form").on("submit", handleMealDataSumbit);
 
 
   function handleMealDataSumbit(event){
     event.preventDefault();
+    console.log(mealData)
 
 
     $.ajax({
       method: "POST",
-      url: "/api/meals",
+      url: "/postmeals",
       data: mealData
     })
     .done(function() {
       console.log(mealData)
-      getMeals;
+      // getMeals;
     });
 
   }; // closing handleMealDataSubmit
