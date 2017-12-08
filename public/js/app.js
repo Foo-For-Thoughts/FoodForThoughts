@@ -10,15 +10,6 @@ $(document).ready(function() {
   function handleMealDataSumbit(event){
     event.preventDefault();
 
-    var mealData = {
-      user: "FlyingUnicorn",
-      meal: "Late night snack",
-      protein: 0,
-      fat: 1,
-      carb: 2,
-      vaggie: 0
-
-    };
 
     $.ajax({
       method: "POST",
