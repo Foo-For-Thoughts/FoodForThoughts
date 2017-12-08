@@ -24,7 +24,7 @@ module.exports = function(app, passport) {
 				password: req.body.password
 			})
 			.then(function() {
-				res.redirect(307, '/auth/login')
+				res.send({redirectTo: '/login'})
 			})
 			.catch(function(err) {
 				res.json(err)
