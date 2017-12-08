@@ -62,40 +62,28 @@
       //and store user to the local storage 
       $scope.update = function(user) {
         $scope.userInfo = angular.copy(user);
-        userUser = $scope.userInfo;
-        localStorage.setItem('loginInfo', user.username);
+        newUser = $scope.userInfo;
+        console.log(newUser)
+        localStorage.setItem('loginInfo', newUser.username);
         $scope.user = angular.copy();
-        $.ajax("/auth/signup", {
-            type: "POST",
-            data: newUser
-          }).done(function(data){
-            console.log(data)
-          })
+        createUser();
       };
       
     }]);
 
-  //   $(".login-form").on("submit", function(event) {
-  //   event.preventDefault()
 
-  //   var newUser = {
-  //     username: $("#username").val().trim(),
-  //     password: $("#password").val().trim()
+  function createUser (){
+    console.log(newUser)
 
-  //   };
+    // Send the POST request.
+    $.ajax("/auth/signup", {
+      type: "POST",
+      data: newUser
+    }).done(function(data){
+      console.log(data)
+    })
+  };
 
-  //   console.log(newUser)
-
-  //   // Send the POST request.
-  //   $.ajax("/auth/signup", {
-  //     type: "POST",
-  //     data: newUser
-  //   }).done(function(data){
-  //     console.log(data)
-  //   })
-
-  // });
-  //on submit go to the food diary page  
 
 </script>
 </body>
