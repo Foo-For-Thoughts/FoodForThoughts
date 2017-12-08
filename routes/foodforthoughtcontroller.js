@@ -75,10 +75,23 @@ module.exports = function(app, passport) {
 		})
 	})
 
-	app.get('/meals/:filter', function(req, res) {
+	app.get('/meals', function(req, res) {
+		var dateVariable = req.body.dateVariable
+
+		var morning = new Date()
+		var night = new Date()
+		morning.setHours(-24*7,0,0,0)
+		night.setHours(24,0,0,0)
+
 		db.meals.findAll({
+
 			where: {
-				userid: req.params.userid			}
+				userId: 1,
+				createdAt: {
+						[Sequelize.Op.lt]: night,
+						[Sequelize.Op.gt]: morning
+					}
+			}
 		}).then(function(meals) {
 			res.json(meals);
 		});
