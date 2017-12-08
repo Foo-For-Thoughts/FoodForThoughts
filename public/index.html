@@ -1,1 +1,61 @@
-<p>index</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Food for Thoughts - Login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Patrick+Hand|Source+Code+Pro|Kalam|Averia+Sans+Libre|Bad+Script|Delius|Give+You+Glory|Just+Me+Again+Down+Here|Loved+by+the+King|Neucha|Pangolin|Patrick+Hand+SC|Reenie+Beanie|Sunshiney|Swanky+and+Moo+Moo|Waiting+for+the+Sunrise" rel="stylesheet">
+</head>
+<body id="html-body">
+  <div class="container">
+    <div class="row">
+      <div class="big-header">
+        <p class="text-right">Food For Thoughts</p>
+      </div>
+      <div class="text-center intro" >
+        <h1>Your first step to diet tracking.</h1>
+          <div>
+            <p>Food For Thoughts makes easy to you keep track of your portion ratios.</p>
+            <p>It's simple to use, but when you're ready for the next step, it will be an easy transition.</p>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+        <img class='onion-index' src="../Onion.png" alt="onion">
+      </div>
+      <div class="col-md-6 col-sm-8 intro text-right">
+       <p>ready to sing up?</p>
+       <input class="btn go-btn" rout="/signup" type="submit" value="Let's Go!" />
+       <p>Already have an account.</p>
+       <input id="tologin" rout="/login" class="btn go-btn" type="submit" value="Login" />
+      </div>
+      <div class="col-md-3 col-sm-1">
+        
+      </div>
+    </div>
+
+ <!-- login controller -->
+<!--   <footer class="footer">
+  <p>cool things like github and main page pr presentation etc</p>
+  <p>hello I'm {{ 5 + 5 }} testing anguler</p>
+  </footer> -->
+
+<script>
+
+$(".go-btn").click(function(){
+
+  var rout =  $(this).attr("rout")
+  var data = {redirectTo: rout}
+  console.log(data)   
+  window.location.href = data.redirectTo
+  });
+
+</script>
+</body>
+</html>

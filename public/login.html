@@ -86,7 +86,6 @@
     $.ajax("/auth/login", {
       type: "POST",
       data: userLogin
-
     }).done(function(data){
       window.location.href = data.redirectTo
     })
