@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Patrick+Hand|Source+Code+Pro|Kalam|Averia+Sans+Libre|Bad+Script|Delius|Give+You+Glory|Just+Me+Again+Down+Here|Loved+by+the+King|Neucha|Pangolin|Patrick+Hand+SC|Reenie+Beanie|Sunshiney|Swanky+and+Moo+Moo|Waiting+for+the+Sunrise" rel="stylesheet">
 </head>
 <body id="html-body">
-  <div class="container"  ng-app="user-login" ng-controller="login">
+  <div class="container">
     <div class="row">
       <div class="big-header">
         <p class="text-right">Food For Thoughts</p>
@@ -31,9 +31,9 @@
       </div>
       <div class="col-md-6 col-sm-8 intro text-right">
        <p>ready to sing up?</p>
-       <input class="btn go-btn" rout="signup" type="submit" value="Let's Go!" />
+       <input class="btn go-btn" rout="/signup" type="submit" value="Let's Go!" />
        <p>Already have an account.</p>
-       <input id="tologin" rout="signup" class="btn go-btn" type="submit" value="Login" />
+       <input id="tologin" rout="/login" class="btn go-btn" type="submit" value="Login" />
       </div>
       <div class="col-md-3 col-sm-1">
         
@@ -48,16 +48,13 @@
 
 <script>
 
-  function routhing (rout){
-    console.log(rout)
-    // Send the POST request.
-    $.ajax("/auth/"+rout+'"', {
-      type: "POST",
-      data: userLogin
-    }).done(function(data){
-      window.location.href = data.redirectTo
-    })
-  };
+$(".go-btn").click(function(){
+
+  var rout =  $(this).attr("rout")
+  var data = {redirectTo: rout}
+  console.log(data)   
+  window.location.href = data.redirectTo
+  });
 
 </script>
 </body>
