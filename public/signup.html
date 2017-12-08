@@ -80,7 +80,7 @@
       type: "POST",
       data: newUser
     }).done(function(data){
-      console.log(data)
+      window.location.href = data.redirectTo
     })
   };
 
