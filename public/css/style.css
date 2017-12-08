@@ -39,14 +39,45 @@
     --red-color: #EAB3B3;
     --olive-color: #EDD023;
 }
-
+h1 {
+  font-size: 5em;
+}
+h2 {
+  font-size: 4em;
+}
+h3 {
+  font-size: 3em;
+}
+h2 {
+  font-size: 2em;
+}
+h1{
+  font-size: 1.6em;
+}
 hr {
   border-top: 2px solid var(--darkgreen-color);
 }
+
 #html-body {
   background-color: var(--lightgreen-color);
   color: var(--darkgreen-color);
-  font-family: 'Patrick Hand', cursive;
+  /*font-family: 'Patrick Hand', cursive;*/
+  /*font-family: 'Neucha', cursive;*/
+  font-family: 'Reenie Beanie', cursive;
+  /*font-family: 'Waiting for the Sunrise', cursive;*/
+  /*font-family: 'Patrick Hand SC', cursive;*/
+  /*font-family: 'Loved by the King', cursive;*/
+  /*font-family: 'Just Me Again Down Here', cursive;*/
+}
+
+.intro {
+  font-size: 2.1em;
+  margin-top: 2em;
+
+}
+.index2{
+  font-size: 3em;
+  font-family: 'Just Me Again Down Here', cursive;
 }
 .pie-chart {
   margin-top: 3em;
@@ -101,7 +132,7 @@ hr {
   height: 2.3em;
   border-radius: 25px;
   border-color: var(--darkgreen-color);
-
+  background-color: white;
 }
 
 .add-btn {
@@ -248,4 +279,8 @@ input.userlogin-input:focus {
     margin-left: 2em;
     transform: rotate(-10deg);
 }
+
+.onion-index {
+  margin-left: 3em;
+  transform: rotate(-10deg);
 }
