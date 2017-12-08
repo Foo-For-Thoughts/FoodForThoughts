@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>testing login</title>
+
+	 <script src="https://code.jquery.com/jquery.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body>
+	
+<div class="container">
+	<div class="row" style="color:#7f0011; font-size:2em">
+		<div class="col-lg-12 text-center" style="margin-top: 50px">
+			<p>Secret Santa</p>
+		</div>
+	</div>
+	<div class="row">
+
+		<div class="col-lg-12 text-center">
+			<img src="./assets/hohoefel.jpg" style="width:300px; margin-bottom: 30px">
+		</div>			
+	</div>
+	<div class="row">
+
+		{{!-- <div class="col-md-4">
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title"><strong>Pairs</strong></h3>
+				</div>
+				<div class="panel-body" id="well-section">
+					<div class="row">
+						<div class="col-md-6">
+							<ul>
+								
+							  {{#each people}}
+							  	<li>
+									{{this.name}}
+								</li>
+							  {{/each}}
+
+							</ul>
+						</div>
+						<div class="col-md-6">
+							<ul>
+								
+							  {{#each people}}
+							  	<li>
+									{{this.secret_santa}}
+								</li>
+							  {{/each}}
+
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> --}}
+		<div class="col-md-6">
+
+			<form class="create-person">
+			  <div class="form-group">
+			    <label for="person">Your username:</label>
+			    <input type="text" class="form-control" id="username">
+			    <label for="person">Your password:</label>
+			    <input type="text" class="form-control" id="password">
+			  </div>
+		  	  <button type="submit" class="btn btn-default">Submit</button>
+			</form>
+			<p> Enter your name, make sure to capitalize the first letter only!</p>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title"><strong>Your Secret Santa!</strong></h3>
+				</div>
+				<div class="panel-body" id="pair" style="font-size:3em">
+					
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<script>
+
+  $(".create-person").on("submit", function(event) {
+    event.preventDefault()
+
+    var newUser = {
+      username: $("#username").val().trim(),
+      password: $("#password").val().trim()
+
+    };
+
+    console.log(newUser)
+
+    // Send the POST request.
+    $.ajax("/auth/login", {
+      type: "POST",
+      data: newUser
+    }).done(function(data){
+      console.log(data)
+      window.location.href = data.redirectTo
+    })
+
+  });
+
+</script>
+
+</body>
+</html>
