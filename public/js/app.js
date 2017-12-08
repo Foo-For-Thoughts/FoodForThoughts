@@ -17,8 +17,8 @@ $(document).ready(function() {
       url: "/postmeals",
       data: mealData
     })
-    .done(function() {
-      console.log(mealData)
+    .done(function(data) {
+      console.log(data)
       // getMeals;
     });
 

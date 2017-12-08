@@ -18,7 +18,7 @@ require("./config/passport")(passport)
 app.use(passport.initialize())
 app.use(passport.session())
 //creating tables
-db.sequelize.sync({force: true})
+db.sequelize.sync()
 // Requiring our routes
 require("./routes/foodforthoughtcontroller.js")(app, passport)
 app.listen(PORT, function() {

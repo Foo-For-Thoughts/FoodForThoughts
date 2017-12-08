@@ -1,0 +1,1 @@
+INSERT INTO meals (meal, protein_servings, carb_servings, fat_servings, fruit_veg_servings, createdAt, updatedAt, userId) VALUES ("newmeal", 1, 2,3, 3, "2017-12-05 05:09:00", "2017-12-05 05:09:00", 1)

@@ -1,5 +1,7 @@
 var db = require("../models");
 var path = require("path");
+var Sequelize = require('sequelize');
+
 
 var isAuthenticated = require('../config/middleware/isAuthenticated');
 
@@ -54,16 +56,26 @@ module.exports = function(app, passport) {
 			carb_servings: req.body.carb,
 			fruit_veg_servings: req.body.veggies
 		}).then(function(data){
-		res.send(data)
+			var morning = new Date()
+			var night = new Date()
+			morning.setHours(0,0,0,0)
+			night.setHours(24,0,0,0)
+
+			db.meals.findAll({
+				where: {
+					userId: req.body.user_id,
+					createdAt: {
+						[Sequelize.Op.lt]: night,
+						[Sequelize.Op.gt]: morning
+					}
+				}
+			}).then(function(data){
+				res.send(data)
+			})
 		})
 	})
 
-	app.get('/meals', function(req, res) {
-
-		console.log(req.user)
-
-		var date = new Date()
-
+	app.get('/meals/:filter', function(req, res) {
 		db.meals.findAll({
 			where: {
 				userid: req.params.userid			}
@@ -72,18 +84,6 @@ module.exports = function(app, passport) {
 		});
 	})
 
-	app.get('/meals/all', function() {
-
-		var date = new Date()
-
-		db.Meals.findAll({
-			where: {
-				userid: req.params.userid,
-			}
-		}).then(function(meals) {
-			res.json(meals);
-		});
-	})
 
 	app.get("/", function(req, res) {
     	res.sendFile(path.join(__dirname, "../public/index.html"));

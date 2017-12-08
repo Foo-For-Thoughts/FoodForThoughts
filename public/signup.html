@@ -80,7 +80,12 @@
       type: "POST",
       data: newUser
     }).done(function(data){
-      window.location.href = data.redirectTo
+      if (data.redirectTo){
+        window.location.href = data.redirectTo
+      }
+      else{
+        alert("That username is already taken!")
+      }
     })
   };
 
