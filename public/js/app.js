@@ -10,13 +10,14 @@ $(document).ready(function() {
   function handleMealDataSumbit(event){
     event.preventDefault();
 
+
     $.ajax({
       method: "POST",
       url: "/api/meals",
       data: mealData
     })
     .done(function() {
-      console.log("did I just add a meal?")
+      console.log(mealData)
       getMeals;
     });
 

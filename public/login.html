@@ -27,8 +27,10 @@
       </div>
       <div ng-controller="login" class="col-md-6 col-sm-6">
         <form novalidate class="login-form">
-          <input type="text" class="userlogin-input" placeholder="Username" aria-describedby="sizing-addon1" ng-model="user.username" />
-          <input type="text" class="userlogin-input" placeholder="password" aria-describedby="sizing-addon1" ng-model="user.password" />
+
+          <input type="text" class="userlogin-input" placeholder="Username" aria-describedby="sizing-addon1" ng-model="user.name" />
+          <input type="text" class="userlogin-input" placeholder="password" aria-describedby="sizing-addon1" ng-model="user.password"/>
+
           <input class="btn login-btn" type="submit" ng-click="update(user)" value="login" />
       </form>
       <!-- <pre>user = {{user | json}}</pre>
