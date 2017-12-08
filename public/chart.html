@@ -205,7 +205,7 @@ var mealData = [
     if (range === "Today"){
       loadChart(todayChart);
     } else if (range === "This-Week") {
-      thisWeekChart();
+      loadChart(thisWeekChart);
     } else if (range === "This-Month") {
       // thisMonthChart();
       console.log('this month')
@@ -242,11 +242,11 @@ var mealData = [
     var veggiesData = [];
     for (var i = mealData.length-1; i > 0; i--) {
         if(todaysDate === mealData[i].time_created){
-       labelArray.push(mealData[i].meal);
-       proteinData.push(mealData[i].protein);
-       carbData.push(mealData[i].carb);
-       fatData.push(mealData[i].fat);
-       veggiesData.push(mealData[i].veggies);
+        labelArray.push(mealData[i].meal);
+        proteinData.push(mealData[i].protein);
+        carbData.push(mealData[i].carb);
+        fatData.push(mealData[i].fat);
+        veggiesData.push(mealData[i].veggies);
       }
     }
     return [
@@ -255,9 +255,36 @@ var mealData = [
   };
 
   function thisWeekChart(){
-  //build and pass this week's emal data to chart
-  
 
+  //build and pass this week's meal data to chart
+  var aWkAgo = new Date();
+  aWkAgo.setDate(aWkAgo.getDate() - 6);
+
+  var labelArray = [];
+  var proteinData = [];
+  var carbData = [];
+  var fatData = [];
+  var veggiesData = [];  
+  var weekDays = {0: "Sun", 1: "Mon", 2: "Tue", 3: "Wed", 4: "Thu", 5: "Fri", 6: "Sat"}
+  //find meals from this week and push them to the data sets
+  for (var i = mealData.length-1; i > 0; i--) {
+    
+    var timeStamp = new Date(mealData[i].time_created);
+
+    if(timeStamp <= aWkAgo){
+        //get which day of the week from time stamp
+        var nthDay = timeStamp.getDay(timeStamp);
+        labelArray.push(weekDays[nthDay]);
+        proteinData.push(mealData[i].protein);
+        carbData.push(mealData[i].carb);
+        fatData.push(mealData[i].fat);
+        veggiesData.push(mealData[i].veggies);
+        foo(labelArray, proteinData, carbData, fatData, veggiesData);
+     }
+    }
+    return [
+      labelArray, proteinData, carbData, fatData, veggiesData
+    ]
   };
 
   function loadChart(callback){
@@ -269,7 +296,6 @@ var mealData = [
     var carbChartData = chartData[2].reverse();
     var fatChartData = chartData[3].reverse();
     var veggiesChartData = chartData[4].reverse();
-    console.log(proteinChartData)
     var ctx = document.getElementById("progress-chart").getContext('2d');
 
     var myChart = new Chart(ctx, {
