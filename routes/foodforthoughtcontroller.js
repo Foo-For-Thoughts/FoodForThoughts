@@ -14,7 +14,7 @@ module.exports = function(app, passport) {
 			// So we're sending the user back the route to the members page because the redirect will happen on the front end
 			// They won't get this or even be able to access this page if they aren't authed
 			res.send({redirectTo: '/food-diary'})
-		})
+		});
 		// Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
 		// how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
 		// otherwise send back an error
