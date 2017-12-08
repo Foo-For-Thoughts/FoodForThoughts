@@ -216,20 +216,6 @@ var mealData = [
 
   };
 
-  // function getTodaysDate(date){
-  
-  //   var day = date.getDate();
-  //   var month = date.getMonth() + 1;
-  //   var year = date.getFullYear();
-  //   var dayOftheWeek = date.getDay();
-  //   if(day < 10){
-  //     day = "0"+day
-  //   }
-  //   var formattedDate = year +"-"+ month + "-" + day;
-  //  return formattedDate
-  // };
-
-
   function todayChart(){
   //build and pass today's meal data to chart 
     var todaysDate = new Date();
@@ -285,6 +271,15 @@ var mealData = [
     return [
       labelArray, proteinData, carbData, fatData, veggiesData
     ]
+  };
+
+  function foo(labelArray, proteinData, carbData, fatData, veggiesData){
+    var labelArray = labelArray;
+    var proteinData = proteinData;
+    var carbData = 4
+    for(meal in ){
+
+    }
   };
 
   function loadChart(callback){
