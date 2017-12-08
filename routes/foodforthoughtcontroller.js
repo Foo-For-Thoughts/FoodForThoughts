@@ -9,16 +9,17 @@ module.exports = function(app, passport) {
 	// If the user has valid login credentials, send them to the members page.
 	// Otherwise the user will be sent an error
 	app.post('/auth/login', passport.authenticate('local'), function(req, res) {
+			console.log("authenticated")
 			// Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
 			// So we're sending the user back the route to the members page because the redirect will happen on the front end
 			// They won't get this or even be able to access this page if they aren't authed
-			res.redirect('/food-diary')
+			res.send({redirectTo: '/food-diary'})
 		})
 		// Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
 		// how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
 		// otherwise send back an error
 	app.post('/auth/signup', function(req, res) {
-		db.User.create({
+		db.user.create({
 				username: req.body.username,
 				password: req.body.password
 			})
@@ -40,9 +41,8 @@ module.exports = function(app, passport) {
 		// Sending back a password, even a hashed password, isn't a good idea
 		res.json({
 			username: req.user.username,
-			id: req.user.id,
-			user: req.user
-		})
+			id: req.user.id
+					})
 	})
 
 	app.get('/meals', function(req, res) {
@@ -51,7 +51,7 @@ module.exports = function(app, passport) {
 
 		var date = new Date()
 
-		db.Meals.findAll({
+		db.meals.findAll({
 			where: {
 				userid: req.params.userid,
 				date: date
@@ -84,6 +84,14 @@ module.exports = function(app, passport) {
 
   	app.get("/chart", function(req, res) {
     	res.sendFile(path.join(__dirname, "../public/chart.html"));
+  	});
+
+  	app.get("/login", function(req, res) {
+    	res.sendFile(path.join(__dirname, "../public/login.html"));
+  	});
+
+  	app.get("/signup", function(req, res) {
+    	res.sendFile(path.join(__dirname, "../public/signup.html"));
   	});
 
 
