@@ -1,42 +1,46 @@
 $(document).ready(function() {
-  // console.log("I'm in app")
 
-  getMeals();
-
+var userID = undefined;
+var maealData = [];
   //submit a meal
   $("#meal-form").on("submit", handleMealDataSumbit);
 
-
   function handleMealDataSumbit(event){
     event.preventDefault();
-    console.log(mealData)
-
-
     $.ajax({
       method: "POST",
       url: "/postmeals",
       data: mealData
     })
     .done(function(data) {
-      console.log(data)
-      // getMeals;
+      console.log(data);
     });
 
   }; // closing handleMealDataSubmit
 
-  function getMeals(){
-    console.log("I'm in get meals")
-    $.get("/meals", renderMealData)
-  }; // closing getMeals
+// from chart html
+//   $("#defaultOpen").on("click", getUserID);
+//   function getUserID(){
+//     console.log("haha")
+//     $.get("/api/user_data", function(data){
+//         userID = data.id
+//         console.log("userID = " + userID)
+//     })
+//   };
 
-  function getAllMeals(){
-    console.log("I'm in get meals")
-    $.get("/meals/all", renderAllMealData)
-  }; // closing getMeals
-
-  function renderMealData(){
-    console.log("yay I'm in render meal data")
-  }; // closing renderMealData
+// //THE GET REQUEST URL SHOULD BE /MEALS/DATEVARIABLE/USERID
+//   $(".tablink").on("click", getMealData);
+//   window.getMealData = getMealData;
+//   function getMealData(){
+//     var range = $(this).attr("num");
+//     var path ="/meals/" + range + "/" + userID;
+//     $.ajax({
+//       url: path
+//     }).done(function(data){
+//       console.log(data)
+//       mealData = data
+//   })
+//   }
 
 
 

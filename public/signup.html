@@ -32,7 +32,7 @@
       <i class="fa fa-area-chart" aria-hidden="true"></i><a href="/chart">Analysis</a>
     </div>
     <div class="navIcon">
-      <i class="fa fa-sign-out" aria-hidden="true"></i><a href="#">Log Out</a>
+      <i class="fa fa-sign-out" aria-hidden="true"></i><a href="#" id="logout">Log Out</a>
     </div>
   </div> <!-- slide Nav -->
   <div class="container"  ng-app="user-login" ng-controller="login">
@@ -40,8 +40,10 @@
       <div class="big-header">
         <p class="text-center">Welcome to Food for Thoughts</p>
       </div>
-        <hr>
-      <div class="col-md-8 col-sm-8">  
+        <hr style="width: 80%;">
+      <div class="col-md-1 col-sm-1"> 
+      </div>
+      <div class="col-md-7 col-sm-7">  
         <div class="text-left our-mission" >
           <p> Take your First Step of Your Journey to Healthy Eating with us.</p>
           <p>There are many apps that can track calories and macros, but they require lot of work and it's overwhelming. <br>Many of us stop using them after a wile.</p> 
@@ -105,7 +107,11 @@
       }
     })
   };
-
+$('#logout').on('click', function() {
+  $.get("/logout", function(data){
+    window.location.href = data.redirectTo
+  })     
+});
 </script>
 </body>
 </html>

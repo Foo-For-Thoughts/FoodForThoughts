@@ -139,30 +139,34 @@ hr {
     text-align: center;
 }
 
-#Today {background-color:red;}
-#This-Week {background-color:green;}
-#This-Month {background-color:blue;}
-#This-Year {background-color:orange;}
+#Today {background-color:#92b8b8;}
+#This-Week {background-color:#bda58d;}
+#This-Month {background-color:#e0c6df;}
+#This-Year {background-color:#abc6d1;}
 
 
 
 .intro, .our-mission {
   font-size: 2.1em;
 }
-
+/*pie chart style*/
 .pie-chart {
   margin-top: 3em;
 }
 #big-pie-chart {
   margin-top: 2em;
-  display: block;
-  width: 100%;
-  height: 110%;
+}
+
+.big-pie-container {
+  width: 380px;
+  margin-left: -100px;
+  margin-bottom: -25px;
 }
 
 .big-header, .add-a-meal{
   padding-top: 1em;
   font-size: 3.6em;
+  padding-left: 2em;
   font-family: 'Neucha', cursive;
   /*font-family: 'Waiting for the Sunrise', cursive;*/
   /*font-family: 'Loved by the King', cursive;*/
@@ -171,6 +175,8 @@ hr {
 #username{
   height: 2em;
 }
+
+/*. "add a meal" styel. */
 .add-a-meal-container {
   /*font-family: 'Nunito', sans-serif;*/
   font-family: 'Source Code Pro', monospace;
@@ -223,7 +229,7 @@ hr {
   display: block;
   width: 10%;
   margin-left: 85%;
-  margin-top: 1em;
+  margin-top: 0.5em;
 }
 
 .login-btn {
@@ -248,14 +254,16 @@ hr {
 .form-container {
   background-color: white;
   padding-bottom: 2em;
-  height: 70vh;
 }
 
 .signupform-container {
   margin-top: 2em;
 }
 
-
+.bottom-container
+{
+  padding: 1em; 
+}
 /*input filed style*/
 
 input {
@@ -264,7 +272,7 @@ input {
   max-height: 1.5em;
 }
 .add-a-meal-input {
-  width: 75%;
+  width: 45%;
   border-radius: 20px;
   -webkit-appearance: textfield;
   -webkit-rtl-ordering: logical;
@@ -288,7 +296,7 @@ ul.food-group-ul > li > input {
   border: 0.2px;
   border-style: solid;
   border-color: rgba(120, 173, 189, 0.33);
-  width: 80%;
+  width: 83%;
   color: brown;
   text-align: center;
   padding: 0.4em;
@@ -345,6 +353,50 @@ input.userlogin-input:focus {
 
 }
 
+.food-group-li:nth-child(1) > section {
+  background: var(--tan-color);
+  color: white;
+  font-size: 30px;
+  text-align: left;
+  padding-left: 10px;
+  height: 250px;
+  max-height: 250px;
+  min-height: 175px;
+}
+
+.food-group-li:nth-child(2) > section {
+  background: var(--green-color);
+  color: white;
+  font-size: 30px;
+  text-align: left;
+  padding-left: 10px;
+  height: 250px;
+  max-height: 250px;
+  min-height: 175px;
+}
+
+.food-group-li:nth-child(3) > section {
+  background: var(--red-color);
+  color: white;
+  font-size: 30px;
+  text-align: left;
+  padding-left: 10px;
+  height: 250px;
+  max-height: 250px;
+  min-height: 175px;
+}
+
+.food-group-li:nth-child(4) > section {
+  background: var(--olive-color);
+  color: white;
+  font-size: 30px;
+  text-align: left;
+  padding-left: 10px;
+  height: 250px;
+  max-height: 250px;
+  min-height: 175px;
+}
+
 .onion {
   position: relative;
   z-index: -2;
@@ -365,4 +417,8 @@ input.userlogin-input:focus {
   margin-left: 2em;
   transform: rotate(45deg) scale(1) translate(-20px,0px);
 
+}
+
+#progress-chart {
+  background-color: white;
 }
