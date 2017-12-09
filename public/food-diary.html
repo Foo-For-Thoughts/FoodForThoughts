@@ -86,8 +86,8 @@
   </footer> -->
 
 <script>
-  getUserID();
   $("#small-pie-container").empty();
+  getUserID();
   var mealData = {};
   var userID = undefined;
   var todaysMeal = {};
@@ -174,15 +174,21 @@
   };
 
   function makeCanvas(){
+    $(".small-pie-container").empty();
+    console.log("It shoubew mptyno")
+    console.log(todaysMeal)
     for(meal in todaysMeal){
-        $(".small-pie-container").append('<div class="col-md-3"><p>'+todaysMeal[meal].meal+'</p><canvas id='+todaysMeal[meal].meal+'></canvas></div>');
-        makePieChat(todaysMeal[meal]);
+      console.log(todaysMeal[meal].meal)
+      $(".small-pie-container").append('<div class="col-md-3"><p>'+todaysMeal[meal].meal+'</p><canvas id='+todaysMeal[meal].meal+'></canvas></div>');
+
+      makePieChat(todaysMeal[meal]);
       }
   };
 
   function makePieChat(data){
-    console.log(data)
+    console.log("haha")
     var datasetsData = [];
+    console.log(datasetsData)
     datasetsData.push(data.carb_servings);
     datasetsData.push(data.fruit_veg_servings);
     datasetsData.push(data.protein_servings);
@@ -217,11 +223,8 @@
     });
   };
 
-
-// $("#meal-form").on("submit", handleMealDataSumbit);
-
-  function handleMealDataSumbit(event){
-    event.preventDefault();
+  function handleMealDataSumbit(){
+    $("#small-pie-container").empty();
     $.ajax({
       method: "POST",
       url: "/postmeals",
@@ -229,8 +232,8 @@
     })
     .done(function(data) {
       console.log(data);
+      console.log('onsumbit');
       todaysMeal = data;
-      $("#small-pie-container").empty();
       makeCanvas();
     });
 
