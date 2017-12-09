@@ -358,14 +358,10 @@ function openTabs(range,elmnt,color) {
 
     // buildChart(range);
 
-
+//THE GET REQUEST URL SHOULD BE /MEALS/DATEVARIABLE/USERID
 
     $.ajax({
-      url: "/meals",
-      data: {
-        dateVariable: 7,
-        user_id: 1
-      },
+      url: "/meals/7/1"
     }).done(function(data){
       console.log(data)
     })
