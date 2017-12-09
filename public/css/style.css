@@ -148,13 +148,8 @@ hr {
 
 .intro, .our-mission {
   font-size: 2.1em;
-  margin-top: 2em;
+}
 
-}
-.index2{
-  font-size: 3em;
-  font-family: 'Just Me Again Down Here', cursive;
-}
 .pie-chart {
   margin-top: 3em;
 }
@@ -165,10 +160,12 @@ hr {
   height: 110%;
 }
 
-.big-header {
+.big-header, .add-a-meal{
   padding-top: 1em;
-  font-size: 4.3em;
-  font-family: 'Source Code Pro', monospace;
+  font-size: 3.6em;
+  font-family: 'Neucha', cursive;
+  /*font-family: 'Waiting for the Sunrise', cursive;*/
+  /*font-family: 'Loved by the King', cursive;*/
 }
 
 #username{
@@ -334,12 +331,6 @@ input.userlogin-input:focus {
 }
 
 /*other styling*/
-
-.our-mission {
-  margin-top: 50px;
-  margin-bottom: 20px;
-}
-
 .food-group-ul {
   list-style: none; 
   display: flex;
