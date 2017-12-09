@@ -373,7 +373,8 @@ function openTabs(range,elmnt,color) {
       $.get("/api/user_data", function(data){
           userID = data.id
           console.log("userID = " + userID)
-          document.getElementById("defaultOpen").click();
+          openTabs('Today', document.getElementById("defaultOpen"), 'red')
+          
       })
     }
 // Get the element with id="defaultOpen" and click on it
