@@ -47,7 +47,7 @@ hr {
   /* Set the fixed height of the footer here */
   height: 60px;
   background: white;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }
@@ -60,14 +60,23 @@ hr {
 }
 
 .fa-home:before, 
-.fa-pencil-square-o:before, 
+.fa-pencil-square-o:before,
+.fa-sign-in:before,
 .fa-area-chart:before, 
 .fa-sign-out:before,
-.fa-sign-in:before 
+.fa-table:before
 {
   font-size: 2em;
 }
 
+.fa-github-alt {
+
+}
+.fa-github-alt:before
+{
+  font-size: 48px;
+  color: black;
+}
 .navIcon{
   margin-top: 2em;
   max-height: 35px;
