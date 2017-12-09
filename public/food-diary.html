@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Food for Thoughts - Log a Meal</title>
+  <title>Food for Thoughts - Meal Log</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
@@ -10,25 +10,39 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
   <link rel="stylesheet" href="css/style.css">
   <script src="./js/app.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand|Source+Code+Pro|Comfortaa" rel="stylesheet">
-
+  <script src="./js/script.js"></script> 
+  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand|Source+Code+Pro|Kalam|Averia+Sans+Libre|Bad+Script|Delius|Give+You+Glory|Just+Me+Again+Down+Here|Loved+by+the+King|Neucha|Pangolin|Patrick+Hand+SC|Reenie+Beanie|Sunshiney|Swanky+and+Moo+Moo|Waiting+for+the+Sunrise" rel="stylesheet">
+  <script src="https://use.fontawesome.com/bb4be6b7dd.js"></script>
 </head>
 
 <body  id="html-body" ng-app="addMeal" >
-  <div class="container" ng-app="ngAnimate" style="border-style: solid;">
+  <div id="slideSidenav" class="sidenav">
+    <div>
+      <i class="fa fa-bars openNav" aria-hidden="true" style="color:white; font-size:30px;cursor:pointer"></i>
+    </div>
+    <div class="navIcon">
+      <i class="fa fa-home" aria-hidden="true"></i><a href="/">Home</a>
+    </div>
+    <div class="navIcon">
+      <i class="fa fa-pencil-square-o" aria-hidden="true"></i><a href="/signup">signup</a>
+    </div>
+    <div class="navIcon">
+      <i class="fa fa-sign-in" aria-hidden="true"></i><a href="/login">Log In</a>
+    </div>
+    <div class="navIcon">
+      <i class="fa fa-area-chart" aria-hidden="true"></i><a href="/chart">Analysis</a>
+    </div>
+    <div class="navIcon">
+      <i class="fa fa-sign-out" aria-hidden="true"></i><a href="#">Log Out</a>
+    </div>
+  </div> <!-- slide Nav -->
+  <div class="container" ng-controller="mealLog">
   <!-- top row  -->
     <div class="row">
       <div class="col-md-9, col-xs-9">
         <div class="big-header">
-            <p class="text-right" id='todaysdate'>Dec 6 2017</p>
+            <p class="text-right" ng-bind="today"></p>
         </div> <!-- today's date -->
-        <div class="add-a-meal-container" ng-controller="AddingMeal">
-          <h3 class="add-a-meal">Add a meal</h3>
-          <form novalidate class="meal-form, add-a-meal-form">
-            <input placeholder="breakfast" class="add-a-meal-input" type="text" ng-model="meal.name" />
-            <input class="btn add-btn" type="submit" ng-click="update(meal)" value="add" />
-          </form>
-        </div> <!-- add-a-meal-container-->
       </div> <!-- col-mid-9 -->   
       <div class="pie-chart, col-md-3, col-xs-3">
         <canvas id="big-pie-chart"></canvas>
@@ -36,11 +50,10 @@
     </div> <!-- top row -->
   <!-- middle row -->
     <div class="row">
-      <div class="col-md-12, main-container" ng-controller="foodNamesCtrl" >
+      <div class="col-md-12, main-container">
         <div class="form-container">
-          <!-- <p ng-bind="mealname">breakfast?</p> -->
-          <p>LUNCH</p>
           <form id="meal-form" ng-submit="submit()">
+            <input placeholder="breakfast" class="add-a-meal-input" type="text" ng-model="meal" />
             <ul class="food-group-ul">
               <li class="food-group-li" ng-repeat="x in foodGroups" ng-init = "data[$index] = x;" ng-model = "data[$index]">
                 <input type="number" placeholder="0 - 20" ng-model = "data[$index].num" name="num"/> 
@@ -81,62 +94,49 @@
   </footer> -->
 
 <script>
-  // getMeals();
+  getUserID();
+  var mealName =  undefined;
+  var mealData = {};
   var userID = undefined;
-  getUserID()
+ 
 //local storage 
   var today = new Date();
+  day = today.getDay();
+  month = today.getMonth()
+  year = today.getFullYear();
+  today = month + " - " + day + " - " + year;
+
   var username = getName();
+
   function getName() {
     return localStorage.getItem('loginInfo');
   }
 
-  var mealName =  undefined;
-  var mealData = {};
-
+//angulerJS app functions
   var app= angular.module('addMeal', []);
 
-    app.controller('AddingMeal', ['$scope', function($scope) {
-      $scope.master = {};
-      $scope.mealName = {};
-      $scope.update = function(meal) {
-        console.log(meal)
-        $scope.master = angular.copy(meal);
-        mealName = meal;
-      };
-
-      $scope.reset = function() {
-        $scope.user = angular.copy($scope.master);
-      };
-
-      $scope.reset();
-
-    }]);
-
-    app.controller('foodNamesCtrl', ['$scope', function($scope) {
+  app.controller('mealLog', ['$scope', function($scope) {
+    $scope.today = today;
+    $scope.data = {};
+    $scope.foodGroups = [
+      {group:'Carb',example:'1 slice bread'},
+      {group:'Fruits/Veggies',example:'1 cup raw leafy vegetables'},
+      {group:'Protein',example:'3 oz cooked meat'},
+      {group:'Oil and Fat',example:'1 tsp soft margarine'},
+    ];
       
-      $scope.data = {};
-
-      $scope.foodGroups = [
-        {group:'Carb',example:'1 slice bread'},
-        {group:'Fruits/Veggies',example:'1 cup raw leafy vegetables'},
-        {group:'Protein',example:'3 oz cooked meat'},
-        {group:'Oil and Fat',example:'1 tsp soft margarine'},
-      ];
-      
-      $scope.submit = function() {
-        mealData = {
-          user_id: userID,
-          meal: mealName.name,
-          protein: $scope.data[2].num,
-          carb: $scope.data[0].num,
-          fat: $scope.data[3].num,
-          veggies: $scope.data[1].num
-        }
-        console.log(mealData)
-      };
-        //console.log($scope.data[0], mealData);
-    }]); //closing foodNameCtrl
+    $scope.submit = function() {
+      mealData = {
+        user_id: userID,
+        meal: $scope.meal,
+        protein: $scope.data[2].num,
+        carb: $scope.data[0].num,
+        fat: $scope.data[3].num,
+        veggies: $scope.data[1].num
+      }
+      console.log(mealData)
+    };
+  }]); //closing foodNameCtrl
 
   var ctx = document.getElementById("big-pie-chart").getContext('2d');
 
