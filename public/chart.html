@@ -32,7 +32,7 @@
       <i class="fa fa-area-chart" aria-hidden="true"></i><a href="/chart">Analysis</a>
     </div>
     <div class="navIcon">
-      <i class="fa fa-sign-out" aria-hidden="true"></i><a href="#">Log Out</a>
+      <i class="fa fa-sign-out" aria-hidden="true"></i><a id="logout">Log Out</a>
     </div>
   </div> <!-- slide Nav -->
 
@@ -398,6 +398,12 @@ function openTabs(range,elmnt,color) {
           document.getElementById("defaultOpen").click();
       })
     }
+
+    $('#logout').on('click', function() {
+      $.get("/logout", function(data){
+        window.location.href = data.redirectTo
+      })     
+    });
 // Get the element with id="defaultOpen" and click on it
 
 
