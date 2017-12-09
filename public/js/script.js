@@ -24,5 +24,21 @@ $(document).ready(function() {
       navisOpen = 0;
     }
   }
+//navigation from index html
+  $(document).on("click", "input.go-btn", function(){
+    var rout =  $(this).attr("rout") 
+    var data = {redirectTo: rout}
+    console.log(data)   
+    window.location.href = data.redirectTo
+  });
+
+//navigation from nav bar 
+  $(document).on("click", "i.a", function(){
+    var rout =  $(this).attr("href") 
+    var data = {redirectTo: href}
+    console.log(data)   
+    window.location.href = data.redirectTo
+  });
   
+
 }); // closing document ready
