@@ -2,40 +2,18 @@
 <html lang="en" ng-app>
 <head>
   <meta charset="UTF-8">
-  <title>Food for Thoughts - Login</title>
+  <title>Food for Thoughts - charts</title>
+  <!-- Latest compiled and minified CSS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="./js/app.js"></script>
-  <script src="./js/script.js"></script> 
-  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand|Source+Code+Pro|Kalam|Averia+Sans+Libre|Bad+Script|Delius|Give+You+Glory|Just+Me+Again+Down+Here|Loved+by+the+King|Neucha|Pangolin|Patrick+Hand+SC|Reenie+Beanie|Sunshiney|Swanky+and+Moo+Moo|Waiting+for+the+Sunrise" rel="stylesheet">
-  <script src="https://use.fontawesome.com/bb4be6b7dd.js"></script>
+  <link rel="stylesheet" href="css/style.css"> 
+  <!-- <script src="./js/app.js"></script> -->
+  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand|Source+Code+Pro" rel="stylesheet">
 </head>
 <body id="html-body">
-  <div id="slideSidenav" class="sidenav">
-    <div>
-      <i class="fa fa-bars openNav" aria-hidden="true" style="color:white; font-size:30px;cursor:pointer"></i>
-    </div>
-    <div class="navIcon">
-      <i class="fa fa-home" aria-hidden="true"></i><a href="/">Home</a>
-    </div>
-    <div class="navIcon">
-      <i class="fa fa-pencil-square-o" aria-hidden="true"></i><a href="/signup">signup</a>
-    </div>
-    <div class="navIcon">
-      <i class="fa fa-sign-in" aria-hidden="true"></i><a href="/login">Log In</a>
-    </div>
-    <div class="navIcon">
-      <i class="fa fa-area-chart" aria-hidden="true"></i><a href="/chart">Analysis</a>
-    </div>
-    <div class="navIcon">
-      <i class="fa fa-sign-out" aria-hidden="true"></i><a href="#">Log Out</a>
-    </div>
-  </div> <!-- slide Nav -->
-
   <div class="container">
     <div class="row">
         <div class="big-header">
@@ -395,7 +373,8 @@ function openTabs(range,elmnt,color) {
       $.get("/api/user_data", function(data){
           userID = data.id
           console.log("userID = " + userID)
-          document.getElementById("defaultOpen").click();
+          openTabs('Today', document.getElementById("defaultOpen"), 'red')
+          
       })
     }
 // Get the element with id="defaultOpen" and click on it
