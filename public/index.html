@@ -29,10 +29,13 @@
       <i class="fa fa-sign-in" aria-hidden="true"></i><a href="/login">Log In</a>
     </div>
     <div class="navIcon">
+      <i class="fa fa-table" aria-hidden="true"></i><a href="/food-diary">Log</a>
+    </div>
+    <div class="navIcon">
       <i class="fa fa-area-chart" aria-hidden="true"></i><a href="/chart">Analysis</a>
     </div>
     <div class="navIcon">
-      <i class="fa fa-sign-out" aria-hidden="true"></i><a href="#">Log Out</a>
+      <i class="fa fa-sign-out" aria-hidden="true"></i><a href="#" id="logout">Log Out</a>
     </div>
   </div> <!-- slide Nav -->
 
@@ -63,15 +66,20 @@
         
       </div>
     </div>
-
+  </div>
  <!-- login controller -->
-<!--   <footer class="footer">
-  <p>cool things like github and main page pr presentation etc</p>
-  <p>hello I'm {{ 5 + 5 }} testing anguler</p>
-  </footer> -->
+  <footer class="footer white-footer">
+  <div class="navIcon text-right" style="padding-right: 2em; padding-top: 0px; margin-top: 0px;">
+    <i class="fa fa-github-alt" aria-hidden="true"></i><a href="https://github.com/Foo-For-Thoughts/FoodForThoughts">GitHub Repo</a>
+  </div>
+  </footer>
 
 <script>
-
+$('#logout').on('click', function() {
+  $.get("/logout", function(data){
+    window.location.href = data.redirectTo
+  })     
+});
 
 </script>
 </body>

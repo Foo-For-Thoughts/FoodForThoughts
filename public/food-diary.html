@@ -15,7 +15,7 @@
   <script src="https://use.fontawesome.com/bb4be6b7dd.js"></script>
 </head>
 
-<body  id="html-body" ng-app="addMeal" >
+<body id="html-body" class="food-diary" ng-app="addMeal">
   <div id="slideSidenav" class="sidenav">
     <div>
       <i class="fa fa-bars openNav" aria-hidden="true" style="color:white; font-size:30px;cursor:pointer"></i>
@@ -33,7 +33,7 @@
       <i class="fa fa-area-chart" aria-hidden="true"></i><a href="/chart">Analysis</a>
     </div>
     <div class="navIcon">
-      <i class="fa fa-sign-out" aria-hidden="true"></i><a href="#">Log Out</a>
+      <i class="fa fa-sign-out" aria-hidden="true"></i><a href="#" id="logout">Log Out</a>
     </div>
   </div> <!-- slide Nav -->
   <div class="container" ng-controller="mealLog">
@@ -41,48 +41,40 @@
     <div class="row">
       <div class="col-md-9, col-xs-9">
         <div class="big-header">
-            <p class="text-right" ng-bind="today"></p>
+            <p class="text-c" ng-bind="today"></p>
         </div> <!-- today's date -->
       </div> <!-- col-mid-9 -->   
-      <div class="pie-chart, col-md-3, col-xs-3">
+      <div class="col-md-3, col-xs-3">
+        <div class="big-pie-container">
         <canvas id="big-pie-chart"></canvas>
+        </div>
       </div> <!-- pie-chart col-md-3 -->
     </div> <!-- top row -->
   <!-- middle row -->
     <div class="row">
       <div class="col-md-12, main-container">
-        <div class="form-container">
+        <div>
           <form id="meal-form" ng-submit="submit()">
-            <input placeholder="breakfast" class="add-a-meal-input" type="text" ng-model="meal" />
+            <input placeholder="enter a meal: breakfast, lunch, etc." class="add-a-meal-input" type="text" ng-model="meal" />
+            <div class="form-container">
             <ul class="food-group-ul">
               <li class="food-group-li" ng-repeat="x in foodGroups" ng-init = "data[$index] = x;" ng-model = "data[$index]">
-                <input type="number" placeholder="0 - 20" ng-model = "data[$index].num" name="num"/> 
+                <input type="number" placeholder="serving 0.0 - 20.0" step="0.1" ng-model = "data[$index].num" name="num"/> 
                 <h2>{{ x.group }}</h2>
-                <section style="background-color: lightblue;">
-                  {{x.example}}
+                <section>
+                  {{x.example1}} <br> {{x.example2}} <br> {{x.example3}}
                 </section>
               </li>
             </ul>
            <input class="btn submit-btn" type="submit" id="submit" value="Submit" />
           </form>
+        </div>
         </div> <!--form container -->
       </div> <!-- main-container -->
     </div> <!-- middle row -->
     <div class="row">
-      <div style="border-style: solid; border-color: red;" class="col-md-12, bottom-container">
-        <div class="row">
-          <div class="col-md-3">
-            <canvas id="small-pie-chart"></canvas>
-          </div>
-          <div class="col-md-3">
-            <canvas id="small-pie-chart"></canvas>
-          </div>
-          <div class="col-md-3">
-            <canvas id="small-pie-chart"></canvas>
-          </div>
-          <div class="col-md-3">
-            <canvas id="small-pie-chart"></canvas>
-          </div>
+      <div class="col-md-12, bottom-container">
+        <div class="row small-pie-container">
         </div>
         
       </div> <!-- bottom-container -->
@@ -95,22 +87,16 @@
 
 <script>
   getUserID();
-  var mealName =  undefined;
+  $("#small-pie-container").empty();
   var mealData = {};
   var userID = undefined;
- 
-//local storage 
+  var todaysMeal = {};
+  var datasetsData =[];
   var today = new Date();
   day = today.getDay();
   month = today.getMonth()
   year = today.getFullYear();
-  today = month + " - " + day + " - " + year;
-
-  var username = getName();
-
-  function getName() {
-    return localStorage.getItem('loginInfo');
-  }
+  today = month + " / " + day + " / " + year;
 
 //angulerJS app functions
   var app= angular.module('addMeal', []);
@@ -119,10 +105,10 @@
     $scope.today = today;
     $scope.data = {};
     $scope.foodGroups = [
-      {group:'Carb',example:'1 slice bread'},
-      {group:'Fruits/Veggies',example:'1 cup raw leafy vegetables'},
-      {group:'Protein',example:'3 oz cooked meat'},
-      {group:'Oil and Fat',example:'1 tsp soft margarine'},
+      {group:'Carb',example1:'- 1 slice bread',example2: "- 1 oz dry cereal", example3:"- 1/2 cup cooked rice, pasta, cereal"},
+      {group:'Fruits/Veggies', example1:'- 1 cup raw vegetables', example2:"- 1/2 cup cut-up raw or cooked vegetables", example3:"- 1 medium fruit"},
+      {group:'Protein', example1:'- 3 oz cooked meat (deck of cards)', example2:'- 3 oz cooked fish (checkbook)', example3:'- 3 oz tofu (cassette tape)'},
+      {group:'Oil and Fat', example1:'- 1 tsp soft margarine', example2:'- 1 tsp vegetable oil', example3:'- 1 Tbsp mayonnaise'},
     ];
       
     $scope.submit = function() {
@@ -134,7 +120,7 @@
         fat: $scope.data[3].num,
         veggies: $scope.data[1].num
       }
-      console.log(mealData)
+      handleMealDataSumbit();
     };
   }]); //closing foodNameCtrl
 
@@ -143,21 +129,21 @@
   var myChart = new Chart(ctx, {
     type: 'pie',
     data: {
-        //labels: ["Grain", "Vaggies/Fruits", "Protein", "Fat/Oil"],
+        // labels: ["Grain", "Vaggies/Fruits", "Protein", "Fat/Oil"],
         datasets: [{
             label: "today's consumption",
             data: [33, 40, 15, 12],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(209, 180, 161, 0.9)',
+                'rgba(101, 174, 155, 0.9)',
+                'rgba(234, 179, 179, 0.9)',
+                'rgba(237, 208, 35, 0.9)'
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(255, 159, 64, 1)'
+                'rgba(209, 180, 161, 1)',
+                'rgba(101, 174, 155, 1)',
+                'rgba(234, 179, 179, 1)',
+                'rgba(237, 208, 35, 1)'
             ],
             borderWidth: 1
         }]
@@ -167,49 +153,94 @@
       }
   });
 
-    var ctxS = document.getElementById("small-pie-chart").getContext('2d');
-
-  var myChart = new Chart(ctxS, {
-    type: 'pie',
-    data: {
-        //labels: ["Grain", "Vaggies/Fruits", "Protein", "Fat/Oil"],
-        datasets: [{
-            label: "today's consumption",
-            data: [33, 40, 15, 12],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-      },
-      options: {
-        cutoutPercentage: 0
-      }
-  });
-
-  // function getMeals(){
-  //   console.log("I'm in get meals")
-  //   $.get("/meals", renderMealData)
-  //   .done(function(data){
-  //    console.log(data)
-  //   });
-  // } // closing getMeals
 
   function getUserID(){
     $.get("/api/user_data", function(data){
         userID = data.id
-        console.log("userID = " + userID)
+        console.log("userID = " + userID)  
+    }).done(function(data){
+      console.log(data.id)
+      getMeals(data.id);
+    });
+   };   
+
+  function getMeals(id){
+    var path = "/meals/1/" + id;
+    $.get(path, function(data){
+      todaysMeal = data;
+    }).done(function(data){
+      makeCanvas();
+    }); 
+  };
+
+  function makeCanvas(){
+    for(meal in todaysMeal){
+        $(".small-pie-container").append('<div class="col-md-3"><p>'+todaysMeal[meal].meal+'</p><canvas id='+todaysMeal[meal].meal+'></canvas></div>');
+        makePieChat(todaysMeal[meal]);
+      }
+  };
+
+  function makePieChat(data){
+    console.log(data)
+    var datasetsData = [];
+    datasetsData.push(data.carb_servings);
+    datasetsData.push(data.fruit_veg_servings);
+    datasetsData.push(data.protein_servings);
+    datasetsData.push(data.fat_servings);
+     console.log(datasetsData)
+    var ctxS = document.getElementById(data.meal).getContext('2d');
+    var myChart = new Chart(ctxS, {
+      type: 'pie',
+      data: {
+
+          datasets: [{
+              label: "today's consumption",
+              data: datasetsData,
+              backgroundColor: [
+                  'rgba(209, 180, 161, 0.9)',
+                  'rgba(101, 174, 155, 0.9)',
+                  'rgba(234, 179, 179, 0.9)',
+                  'rgba(237, 208, 35, 0.9)'
+              ],
+              borderColor: [
+                  'rgba(209, 180, 161, 1)',
+                  'rgba(101, 174, 155, 1)',
+                  'rgba(234, 179, 179, 1)',
+                  'rgba(237, 208, 35, 1)'
+              ],
+              borderWidth: 1
+          }]
+        },
+        options: {
+          cutoutPercentage: 0
+        }
+    });
+  };
+
+
+// $("#meal-form").on("submit", handleMealDataSumbit);
+
+  function handleMealDataSumbit(event){
+    event.preventDefault();
+    $.ajax({
+      method: "POST",
+      url: "/postmeals",
+      data: mealData
     })
-  } // closing getMeals
+    .done(function(data) {
+      console.log(data);
+      todaysMeal = data;
+      $("#small-pie-container").empty();
+      makeCanvas();
+    });
+
+}; // closing handleMealDataSubmit
+
+$('#logout').on('click', function() {
+  $.get("/logout", function(data){
+    window.location.href = data.redirectTo
+  })     
+});
 
 </script>
 </body>
