@@ -54,8 +54,25 @@ hr {
 
 /**** side navigation bar ****/
 .fa {
+  padding-top: 2em;
   padding: 3px;
+  color: white;
 }
+
+.fa-home:before, 
+.fa-pencil-square-o:before, 
+.fa-area-chart:before, 
+.fa-sign-out:before,
+.fa-sign-in:before 
+{
+  font-size: 2em;
+}
+
+.navIcon{
+  margin-top: 2em;
+  max-height: 35px;
+}
+
 .sidenav {
     height: 100%;
     width: 50px;
@@ -63,7 +80,7 @@ hr {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: var(--darkgreen-color);
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -72,11 +89,12 @@ hr {
 
 .sidenav a {
     padding: 8px 8px 8px 32px;
-    text-decoration: none;
+    text-decoration: underline;
     font-size: 25px;
-    color: #818181;
-    display: block;
+    color: white;
     transition: 0.3s;
+    position: absolute;
+    left: 45px;
 }
 
 .sidenav a:hover {
@@ -93,7 +111,6 @@ hr {
 
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
 }
 
 /*****chart header*******/
@@ -183,17 +200,19 @@ hr {
   border-radius: 25px;
   border-color: var(--darkgreen-color);
   background-color: white;
-
+  font-size: 26px;
+  line-height: 28px;
+  max-height: 1.5em;
 }
 
 .add-btn {
   width: 20%;
-  font-size: 2em;
+  /*font-size: 2em;*/
 }
 
 .btn.focus, .btn:hover, .btn:focus, .btn:active {
-   outline: none !important;
-   color: var(--darkgreen-color) !important;
+  outline: none !important;
+  color: var(--darkgreen-color) !important;
 }
 
 .add-btn:focus {
@@ -217,7 +236,7 @@ hr {
 
 .signup-btn {
   min-width: 25%;
-  margin-left: 40%;
+  float: right;
   padding: 5px;
 }
 
@@ -242,6 +261,11 @@ hr {
 
 /*input filed style*/
 
+input {
+  font-size: 26px;
+  line-height: 28px;
+  max-height: 1.5em;
+}
 .add-a-meal-input {
   width: 75%;
   border-radius: 20px;
@@ -284,7 +308,6 @@ input.userlogin-input {
   width: 100%;
   height: 34px;
   padding: 6px 12px;
-  font-size: 14px;
   line-height: 1.42857143;
   color: #555;
   background-color: #fff;
@@ -300,14 +323,14 @@ input.userlogin-input {
 }
 
 input.userlogin-input:focus {
-    border-color: var(--green-color);
-    border-top-color: var(--green-color);
-    border-right-color: var(--green-color);
-    border-bottom-color: var(--green-color);
-    border-left-color: var(--green-color);
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+  border-color: var(--green-color);
+  border-top-color: var(--green-color);
+  border-right-color: var(--green-color);
+  border-bottom-color: var(--green-color);
+  border-left-color: var(--green-color);
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
 }
 
 /*other styling*/
@@ -334,12 +357,21 @@ input.userlogin-input:focus {
 .onion {
   position: relative;
   z-index: -2;
-  margin-top: -6em;
+  margin-top: -3em;
   margin-left: -1.6em;
-  transform: rotate(30deg);
+  transform: rotate(-30deg);
 }
 
 .onion-index {
   margin-left: 3em;
   transform: rotate(-10deg);
+}
+
+.artichoke {
+  position: relative;
+  z-index: -2;
+  margin-top: 1em;
+  margin-left: 2em;
+  transform: rotate(45deg) scale(1) translate(-20px,0px);
+
 }
