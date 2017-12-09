@@ -103,11 +103,11 @@ module.exports = function(app, passport) {
     	res.sendFile(path.join(__dirname, "../public/index.html"));
   	});
 
-  	app.get("/food-diary", function(req, res) {
+  	app.get("/food-diary", isAuthenticated, function(req, res) {
     	res.sendFile(path.join(__dirname, "../public/food-diary.html"));
   	});
 
-  	app.get("/chart", function(req, res) {
+  	app.get("/chart", isAuthenticated, function(req, res) {
     	res.sendFile(path.join(__dirname, "../public/chart.html"));
   	});
 
