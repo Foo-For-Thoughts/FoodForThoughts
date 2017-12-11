@@ -199,6 +199,7 @@
   function thisYearChart(){
   
   //build and pass this week's meal data to chart
+  var preMonth = "";
   var labelArray = [];
   var proteinData = [];
   var carbData = [];
@@ -208,9 +209,13 @@
   //find meals from this week and push them to the data sets
   for (var i = mealData.length-1; i >= 0; i--) {
     var day = new Date(mealData[i].createdAt);
-    day.getMonth();
-    var month = months[day.getMonth()];
-    //get which day of the month from time stamp
+    console.log(mealData[i].createdAt)
+    var month = months[day.getMonth()+1];
+    //if meal data is coming from the same month, then add the value 
+    //to create the month total
+    // if (preMonth === month) {
+      
+    // }
     labelArray.push(month);
     proteinData.push(mealData[i].protein_servings);
     carbData.push(mealData[i].carb_servings);
@@ -242,26 +247,26 @@
           labels: labelsChartData,
           datasets: [{
               label: "carb",
-              backgroundColor: 'rgb(255, 99, 132)',
-              borderColor: 'rgb(255, 99, 132)',
+              backgroundColor: 'rgb(209, 180, 161)',
+              borderColor: 'rgb(209, 180, 161)',
               data: carbChartData,
           },
           {
             label: "veggies",
-            backgroundColor: 'rgb(255, 200, 102)',
-            borderColor: 'rgb(255, 200, 102)',
+            backgroundColor: 'rgb(101, 174, 155)',
+            borderColor: 'rgb(101, 174, 155)',
             data: veggiesChartData,
           },
           {
             label: "protein",
-            backgroundColor: 'rgb(212, 180, 102)',
-            borderColor: 'rgb(212, 180, 102)',
+            backgroundColor: 'rgb(234, 179, 179)',
+            borderColor: 'rgb(234, 179, 179)',
             data: proteinChartData,
           },
           {
             label: "fat",
-            backgroundColor: 'rgb(245, 180, 102)',
-            borderColor: 'rgb(245, 180, 102)',
+            backgroundColor: 'rgb(237, 208, 35)',
+            borderColor: 'rgb(237, 208, 35)',
             data: fatChartData,
           }
 

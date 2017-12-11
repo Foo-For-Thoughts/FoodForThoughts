@@ -54,8 +54,7 @@ hr {
 
 /**** side navigation bar ****/
 .fa {
-  padding-top: 2em;
-  padding: 3px;
+  padding-top: 10px;
   color: white;
 }
 
@@ -159,11 +158,8 @@ hr {
   font-size: 2.1em;
 }
 /*pie chart style*/
-.pie-chart {
-  margin-top: 3em;
-}
 #big-pie-chart {
-  margin-top: 2em;
+
 }
 
 .big-pie-container {
