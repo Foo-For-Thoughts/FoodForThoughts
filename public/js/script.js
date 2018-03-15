@@ -3,27 +3,20 @@ $(document).ready(function() {
 
   var navisOpen = 0;
   function openNav() {
-    document.getElementById("slideSidenav").style.width = "250px";
-    document.getElementById("html-body").style.marginLeft = "250px";
+    $("#html-body").animate({marginLeft: "250px"}, 150, function() {
+      $("#slideSidenav").animate({width: "250px"}, 150);
+    });
   }
 
   function closeNav() {
-    console.log("inclosed")
-    document.getElementById("slideSidenav").style.width = "50px";
-    document.getElementById("html-body").style.marginLeft= "50px";
+    $("#slideSidenav").animate({width: "50px"}, 50, function() {
+      $("#html-body").animate({marginLeft: "50px"}, 300);
+    });
   }
   
-  $(document).on("click", "i.openNav", opencloseNav);
-  
-  function opencloseNav(){
-    if (navisOpen === 0) {
-      openNav();
-      navisOpen = 1;
-    } else {
-      closeNav();
-      navisOpen = 0;
-    }
-  }
+  $(document).on("mouseenter", "#slideSidenav", openNav);
+  $(document).on("mouseleave", "#slideSidenav", closeNav);
+
 //navigation from index html
   $(document).on("click", "input.go-btn", function(){
     var rout =  $(this).attr("rout") 

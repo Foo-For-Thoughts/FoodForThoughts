@@ -98,7 +98,7 @@
   var datasetsData =[];
   var today = new Date();
   day = today.getDate();
-  month = today.getMonth()
+  month = today.getMonth() + 1;
   year = today.getFullYear();
   today = month + " / " + day + " / " + year;
 
@@ -133,7 +133,7 @@
   var myChart = new Chart(ctx, {
     type: 'pie',
     data: {
-        // labels: ["Grain", "Vaggies/Fruits", "Protein", "Fat/Oil"],
+        labels: ["Grain", "Vaggies/Fruits", "Protein", "Fat/Oil"],
         datasets: [{
             label: "today's consumption",
             data: [33, 40, 15, 12],
@@ -153,6 +153,7 @@
         }]
       },
       options: {
+        legend: false,
         cutoutPercentage: 0
       }
   });
@@ -161,9 +162,7 @@
   function getUserID(){
     $.get("/api/user_data", function(data){
         userID = data.id
-        console.log("userID = " + userID)  
     }).done(function(data){
-      console.log(data.id)
       getMeals(data.id);
     });
    };   
@@ -179,30 +178,24 @@
 
   function makeCanvas(){
     $(".small-pie-container").empty();
-    console.log("It shoubew mptyno")
-    console.log(todaysMeal)
     for(meal in todaysMeal){
-      console.log(todaysMeal[meal].meal)
       $(".small-pie-container").append('<div class="col-md-3"><p>'+todaysMeal[meal].meal+'</p><canvas id='+todaysMeal[meal].meal+'></canvas></div>');
-
       makePieChat(todaysMeal[meal]);
       }
   };
 
   function makePieChat(data){
-    console.log("haha")
+    var labels = [];
     var datasetsData = [];
-    console.log(datasetsData)
     datasetsData.push(data.carb_servings);
     datasetsData.push(data.fruit_veg_servings);
     datasetsData.push(data.protein_servings);
     datasetsData.push(data.fat_servings);
-     console.log(datasetsData)
     var ctxS = document.getElementById(data.meal).getContext('2d');
     var myChart = new Chart(ctxS, {
       type: 'pie',
       data: {
-
+          labels: ["Grain", "Vaggies/Fruits", "Protein", "Fat/Oil"],
           datasets: [{
               label: "today's consumption",
               data: datasetsData,
@@ -222,6 +215,7 @@
           }]
         },
         options: {
+          legend: false,
           cutoutPercentage: 0
         }
     });
@@ -235,8 +229,6 @@
       data: mealData
     })
     .done(function(data) {
-      console.log(data);
-      console.log('onsumbit');
       todaysMeal = data;
       makeCanvas();
     });

@@ -84,7 +84,7 @@
   if(username){
     $("#username").html(username);
   }
-  // });
+
   var userLogin = {};
   var ctxLI = angular.module('user-login', []);
     ctxLI.controller('login', ['$scope', function($scope) {
@@ -99,15 +99,12 @@
         localStorage.setItem('loginInfo', user.username);
         $scope.user = angular.copy();
         loginUser();
-        console.log(user, "user")
       };
-
       
     }]);
 
 
   function loginUser (){
-    console.log(userLogin)
     // Send the POST request.
     $.ajax("/auth/login", {
       type: "POST",
