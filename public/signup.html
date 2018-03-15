@@ -51,8 +51,7 @@
       <div class="col-md-7 col-sm-7">  
         <div class="text-left our-mission" >
           <p> Take your First Step of Your Journey to Healthy Eating with us.</p>
-          <p>There are many apps that can track calories and macros, but they require lot of work and it's overwhelming. <br>Many of us stop using them after a wile.</p> 
-          <p>Some dieters become too obsessed with numbers and their emotional health is in danger.</p>
+          <p>There are many apps that track calories and macros, but they require lot of work and it's overwhelming. <br>Many of us stop using them after a while. Some dieters even become too obsessed with numbers and their emotional health is in danger.</p>
           <p>we wanted to strike the right balance and build something sustainable, easy to use, and effective. <br>Our analysis chart can show your progress on one screen.</p>
           <p>Together, we will build our healthy food habit for our healthy life style.</p>
         </div>
@@ -88,7 +87,6 @@
       $scope.update = function(user) {
         $scope.userInfo = angular.copy(user);
         newUser = $scope.userInfo;
-        console.log(newUser)
         localStorage.setItem('loginInfo', newUser.username);
         $scope.user = angular.copy();
         createUser();
@@ -98,7 +96,6 @@
 
 
   function createUser (){
-
     // Send the POST request.
     $.ajax("/auth/signup", {
       type: "POST",

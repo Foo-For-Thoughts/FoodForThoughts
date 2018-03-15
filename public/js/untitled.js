@@ -202,146 +202,6 @@
 //     ]//sample meal data
 
 
-
-  // function buildChart(range){
-
-  //   if (range === "Today"){
-  //     loadChart(todayChart);
-  //   } else if (range === "This-Week") {
-  //     loadChart(thisWeekChart);
-  //   } else if (range === "This-Month") {
-  //     // thisMonthChart();
-  //     console.log('this month')
-  //   } else if (range === "This-Year") {
-  //     // thisYearChart();
-  //     console.log('this year')
-  //   }
-
-  // };
-
-  // function todayChart(){
-  // //build and pass today's meal data to chart 
-  //   var todaysDate = new Date();
-  //   console.log(todaysDate = mealData[14].time_created)
-  //   //make labels and data sets
-  //   var labelArray = [];
-  //   var proteinData = [];
-  //   var carbData = [];
-  //   var fatData = [];
-  //   var veggiesData = [];
-  //   for (var i = mealData.length-1; i > 0; i--) {
-  //       if(todaysDate === mealData[i].time_created){
-  //       labelArray.push(mealData[i].meal);
-  //       proteinData.push(mealData[i].protein);
-  //       carbData.push(mealData[i].carb);
-  //       fatData.push(mealData[i].fat);
-  //       veggiesData.push(mealData[i].veggies);
-  //     }
-  //   }
-  //   return [
-  //     labelArray, proteinData, carbData, fatData, veggiesData
-  //   ]
-  // };
-
-  // function thisWeekChart(){
-
-  // //build and pass this week's meal data to chart
-  // var aWkAgo = new Date();
-  // aWkAgo.setDate(aWkAgo.getDate() - 6);
-
-  // var labelArray = [];
-  // var proteinData = [];
-  // var carbData = [];
-  // var fatData = [];
-  // var veggiesData = [];  
-  // var weekDays = {0: "Sun", 1: "Mon", 2: "Tue", 3: "Wed", 4: "Thu", 5: "Fri", 6: "Sat"}
-  // //find meals from this week and push them to the data sets
-  // for (var i = mealData.length-1; i > 0; i--) {
-    
-  //   var timeStamp = new Date(mealData[i].time_created);
-
-
-  //   if(timeStamp <= aWkAgo){
-  //       //get which day of the week from time stamp
-  //       var nthDay = timeStamp.getDay(timeStamp);
-  //       labelArray.push(weekDays[nthDay]);
-  //       proteinData.push(mealData[i].protein);
-  //       carbData.push(mealData[i].carb);
-  //       fatData.push(mealData[i].fat);
-  //       veggiesData.push(mealData[i].veggies);
-  //       foo(labelArray, proteinData, carbData, fatData, veggiesData);
-  //    }
-  //   }
-  //   return [
-  //     labelArray, proteinData, carbData, fatData, veggiesData
-  //   ]
-  // };
-
-  // function foo(labelArray, proteinData, carbData, fatData, veggiesData){
-  //   var labelArray = labelArray;
-  //   var proteinData = proteinData;
-  //   var carbData = 4
-  //   for(meal in ){
-
-  //   }
-  // };
-
-  // function loadChart(callback){
-    
-  //   var chartData = callback();
-  //   console.log(chartData)
-  //   var labelsChartData = chartData[0].reverse();
-  //   var proteinChartData = chartData[1].reverse();
-  //   var carbChartData = chartData[2].reverse();
-  //   var fatChartData = chartData[3].reverse();
-  //   var veggiesChartData = chartData[4].reverse();
-  //   var ctx = document.getElementById("progress-chart").getContext('2d');
-
-  //   var myChart = new Chart(ctx, {
-  //     // The type of chart we want to create
-  //     type: 'line',
-
-  //     // The data for our dataset
-  //     data: {
-  //         labels: labelsChartData,
-  //         datasets: [{
-  //             label: "carb",
-  //             backgroundColor: 'rgb(255, 99, 132)',
-  //             borderColor: 'rgb(255, 99, 132)',
-  //             data: carbChartData,
-  //         },
-  //         {
-  //           label: "veggies",
-  //           backgroundColor: 'rgb(255, 200, 102)',
-  //           borderColor: 'rgb(255, 200, 102)',
-  //           data: veggiesChartData,
-  //         },
-  //         {
-  //           label: "protein",
-  //           backgroundColor: 'rgb(212, 180, 102)',
-  //           borderColor: 'rgb(212, 180, 102)',
-  //           data: proteinChartData,
-  //         },
-  //         {
-  //           label: "fat",
-  //           backgroundColor: 'rgb(245, 180, 102)',
-  //           borderColor: 'rgb(245, 180, 102)',
-  //           data: fatChartData,
-  //         }
-
-  //         ]},
-
-  //     // Configuration options go here
-  //     options: {scales: {
-  //             yAxes: [{
-  //                 stacked: true
-  //             }]
-  //         }}
-  //   });
-  // };
-
-// Tabs navigation
-
 function openTabs(range,elmnt,color) {
 
     var i, tabcontent, tablinks;
@@ -369,15 +229,14 @@ function openTabs(range,elmnt,color) {
 
 }
 
-    function getUserID(){
-      $.get("/api/user_data", function(data){
-          userID = data.id
-          console.log("userID = " + userID)
-          openTabs('Today', document.getElementById("defaultOpen"), 'red')
-          
-      })
-    }
-// Get the element with id="defaultOpen" and click on it
+  function getUserID(){
+    $.get("/api/user_data", function(data){
+        userID = data.id
+        console.log("userID = " + userID)
+        openTabs('Today', document.getElementById("defaultOpen"), 'red')
+        
+    })
+  }
 
 
 </script>
